@@ -88,12 +88,10 @@ livere_uid: your_livere_uid
 ## links
 search: false
 avatar: /imgs/img_index.png
-aside-description: 君子终日乾乾，夕惕若厉，无咎。
+aside-description: “君子终日乾乾，夕惕若厉，无咎。”
 
 links:
-  百度: https://www.baidu.com/
-  知乎: https://www.zhihu.com/
-  衔蝉厌水: https://blog.csdn.net/NULL_thing
+  衔蝉厌水（CSDN）: https://blog.csdn.net/NULL_thing
   
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
