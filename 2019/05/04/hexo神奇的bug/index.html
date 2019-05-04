@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang=>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="keywords" content>
+  
+    <link rel="icon" href="/imgs/favicon.ico">
+  
+    
+  <title>hexo神奇的bug | 炜峄的博客</title>
+  <meta name="description" content="hexo生成的静态网页无法找到style.css | ">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class="logo" href="/">
+      <span>炜峄的博客</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id="post">
+  <div class="content">
+    <article>
+      <section class="content markdown-body">
+        <h1>
+          hexo神奇的bug
+        </h1>
+        <div class="post-meta">
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>
+            2019/05/04</time>
+          
+          | <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/漫步于山间/">漫步于山间</a>
+  </div>
+
+
+
+          
+          
+          |
+          
+          <i class="fa fa-tag" aria-hidden="true"></i>
+          
+          
+  <a href="/tags/#填坑记录" class="tag">填坑记录</a>
+
+
+          
+        </div>
+        <p>起因是github发了一个邮件，告诉我备份在分支的package-lock.json里面node-tar版本太低。</p>
+<p>好吧，我寻思着在更新一下吧，随便把有关博客的备份全更新一下（该分支就是我用来存搭建博客环境的相关东西的）。</p>
+<p>查了很久发现根本更新不了，用hexo重新搭建一遍gitpage博客反而会简单一点。然后我重新搭建了一遍，博客的环境应该是新的了。</p>
+<p>结果第二天一看，发现整个网站没了样式。百度并没有找到好的解决方法。从网站上看，是因为网页在根目录下找不到style.css，我看了一下github仓库下的master分支（用来存放静态网页的）style.css，倒是有个style.scss。我在主题的作者给的demo中，直接把css文件给拷到本地的public文件夹下，然后hexo d，就成了。</p>
+<p>虽然这一套操作很不优雅，但是对着博客重装了好几遍本地环境，实在是没脾气了都。我寻思着也许是这个主题跟最新的hexo不兼容吧，scss是比css性能好，可这个aath主题太好看了不想换。</p>
+
+      </section>
+    </article>
+    
+    
+  </div>
+  <aside>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy;
+      2019 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/ScrollMagic.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  document.body.addEventListener('touchstart', function () { });
+
+  // 文章图片预览
+  $("article img").each(function () {
+    var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+    $(this).wrapAll(strA);
+  });
+
+  // 目录联动
+  let tocLinkList = $('.toc-link')
+
+  let controller = new ScrollMagic.Controller({
+    globalSceneOptions: {
+      triggerHook: 0.01
+    }
+  })
+
+  tocLinkList.each(function (index, elem) {
+    let href = $(this).attr("href");
+    let nextHref = tocLinkList.eq(index + 1).attr("href");
+    let height = href && nextHref ? $(nextHref).offset().top - $(href).offset().top : 0
+
+    new ScrollMagic.Scene({ triggerElement: href })
+      .duration(height)
+      .setClassToggle(".toc [href='" + href + "']", 'active')
+      .addTo(controller)
+  })
+
+  window.addEventListener('load', function () {
+    // 目录联动 图片加载完成后从新计算
+    tocLinkList.each(function (index, elem) {
+      let href = $(this).attr("href");
+      let nextHref = tocLinkList.eq(index + 1).attr("href");
+      let height = href && nextHref ? $(nextHref).offset().top - $(href).offset().top : 0
+
+      new ScrollMagic.Scene({ triggerElement: href })
+        .duration(height)
+        .setClassToggle(".toc [href='" + href + "']", 'active')
+        .addTo(controller)
+    })
+  })
+</script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>
