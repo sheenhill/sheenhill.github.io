@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang=>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="keywords" content>
+  
+    <link rel="icon" href="/imgs/favicon.ico">
+  
+    
+  <title>菜鸟体验独立开发之感想 | 炜峄的博客</title>
+  <meta name="description" content="一直想做一个完整的项目，通过一段时间的寻找，打算用微信小程序+小程序自带的云开发来完成我的《留言墙》项目，整个项目倒不难，但那些我不曾注意的方面让我举步维艰。 | ">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class="logo" href="/">
+      <span>炜峄的博客</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id="post">
+  <div class="content">
+    <article>
+      <section class="content markdown-body">
+        <h1>
+          菜鸟体验独立开发之感想
+        </h1>
+        <div class="post-meta">
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>
+            2019/04/20</time>
+          
+          | <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/微信小程序/">微信小程序</a>
+  </div>
+
+
+
+          
+          
+          |
+          
+          <i class="fa fa-tags" aria-hidden="true"></i>
+          
+          
+  <a href="/tags/#日志" class="tag">日志</a>
+
+  <a href="/tags/#微信小程序" class="tag">微信小程序</a>
+
+  <a href="/tags/#思考" class="tag">思考</a>
+
+
+          
+        </div>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这个小程序做了有一段时间了，第一次独立做项目，发现自己恨不得变成多线程，同时进行构建框架、完善模块功能和测试。</p>
+<p>当然，构建框架、完善模块功能和测试这三个词我也是最近才深有体会的，这三种不同类型的开发一个人进行让我感觉到团队的重要性。我觉得除了学习时间，切换不同类型的功能的开发状态是最耗时间和精力的。而且我在开发过程发现不同类型的开发其实密不可分，且各自又有不同。我需要找到一种好方法来节约时间和精力。</p>
+<p>经过思考和尝试，我觉得我有可能触碰到了一种类似的且稍微有效的方法，希望通过写博客和不停地试错来逐渐掌握这种方法。</p>
+<p><em>我所了解的专业知识还是太少，所以当我以后再回来看的时候，肯定会再修改的。</em></p>
+<h2 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h2><p>对于我，这种不够聪明，代码能力不强的独立开发者来说，最大的限制就是在做这个项目之前，我并没有对我要做的是一个什么样的小程序有清晰的思路。我的目的和需求根本不明确，所以在不断尝试中可能会产生一些新的想法，也会推翻一些之前的想法。当然我一开始并不知道我的想法那么模糊，不然也不会有怎么深的领悟，呜呜呜…</p>
+<p>其次就是本文说的时间与精力限制，每个人的时间和精力都是有限的，将其无端地浪费在不重要的事上是不明智的。例如，我在做这项目时，我一开始会在写具体功能实现时发现整个框架有漏洞，我便去修改框架，修改着框架我又觉着后端数据库设计不合理，然后又感觉UI有问题… … 而且我每次去做一个不同类型的开发时，我还要看上下文找我代码的思路（简介明了的注释很重要）。</p>
+<h2 id="为什么做个小程序"><a href="#为什么做个小程序" class="headerlink" title="为什么做个小程序"></a>为什么做个小程序</h2><p>首先，微信小程序的门槛确实低。</p>
+<p>做这个项目之前我仔细阅读过开发文档，也看过一个简短的小程序入门视频，发现它跟我之前学的知识有很多相通之处。在这推荐一个视频：<a href="https://www.imooc.com/learn/974" target="_blank" rel="noopener">入门微信小程序开发</a>，虽然视频没有教具体的项目，但是看完之后会对小程序开发有个大概的认识，对有web开发经验的帮助很大。</p>
+<p>当我确定了目标后，简单地想了一下需求，发现简单的留言墙功能并不要什么需求啊。于是开始用墨刀画原型图，这时我才发现将想法具体表现出来是多么困难的一件事。（后面的事更难）</p>
+<p>当时大概想了四五个页面，也只用墨刀大致地画了俩三张原型图，觉得太麻烦了就不做了，但是思路是清晰多了。</p>
+<p>之后将几个原型图在页面实现了，而且用思维导图划分了几个重要模块，打算分模块进行。</p>
+<p>虽说之前也没太多的前端经验，但是js还是能看懂的。文档学了一段时间，发现大部分都能理解的，不能理解的多花了一些时间，单纯的学习文档并没有什么挫败感。而且多学些小程序运行机制，能让我少出一些功能代码以外的bug，也可以提升我对webview的理解。</p>
+<p>理解了80%左右时，我就开始写项目了，反正学完了用的时候还是会忘的，到时候再回来查呗。因为我之前主要就是学Android，后端的东西基本不会，所以我重点学习的时微信小程序的云开发，也是因为云开发我才入坑的。</p>
+<h2 id="消耗"><a href="#消耗" class="headerlink" title="消耗"></a>消耗</h2><p>其实我也知道能集中精力去做一件<strong>小事</strong>，容易获得成就感，并激励我完成整个项目（我也是做博客时刚想起这个事）。可是我一开始并没有把我的工作分得太清晰，一是因为本来觉得整个项目很小，二是因为所有的事情都是自己的，现在不做以后也得做，逃不了的。所以就没有花太久来制定一个详细的开发计划。想着一个功能一个功能的实现，慢慢就能拼出整个项目了吧。到现在我还是觉得这种想法没什么问题，唯一的问题就是我对自己的认知和项目的划分出现了严重的偏差，以至于具体功能的实现时间不好控制。</p>
+<p>一开始实现首页显示留言墙详细信息的具体代码实现和云开发中数据库集合（相当于传统数据库中的表），与现在的已经完全不一样了。第一次做粗糙的首页显示功能模块时，就是边做边摸索（当时不太熟悉小程序本地函数和云函数写法）。像这个功能模块，初代其实只要实现从数据库查询，再到首页显示就可以了，但是这个功能大部分花的时间在对小程序js的写法和对云开发的理解上。在写的过程中想到的测试问题和优化点，都让我分心，还有这只是个光秃秃的模块，还需要在一个稍微完整的框架里面执行，查看效果。</p>
+<p>此时，便开始了消耗。</p>
+<p>在实现模块功能时，回想着完善框架，其中还要不停地测试，以保证代码质量。</p>
+<h2 id="也许有用的方法"><a href="#也许有用的方法" class="headerlink" title="也许有用的方法"></a>也许有用的方法</h2><p>在刚开始那段时间里，制定几天的计划来为整个架构实现一个功能或者实现某一个功能模块的初代版本，在一开始可能会产生对整个项目有些不一样的想法，记下来！不影响现在做的这件事的，就记下来；影响现在做的事的，就说明现在做的这件事做得太早了，所以将想法现在就考虑清楚并实现。越到后面，从零开始做的事就越少了，这时就是重构了，所以前期写代码前多思考，写代码时多注释。</p>
+<p>我现在感觉独立开发时，最重要的消耗是：在开发中不断涌现的新想法使得目标程序在脑海中、笔记中逐渐清晰，从而导致开发时的急功近利，即框架、模块和测试都要面面俱到，这很显然在项目的开始是不可能的。</p>
+<p>尤其当代码量变得多了（小程序ide没有函数追踪这让我很难受），一个模块写完后，开始写另一个模块或者修改其他模块代码时，理解自己写的整个项目的上下文还是需要一些时间和精力的。</p>
+<p>所以用一天或几天来专注实现一个小功能，可以减少进入一种开发状态的思考，阅读等时间和精力。</p>
+<p><strong>下面是我的瞎想</strong></p>
+<p>或许当对开发熟练以后，可以做到一种多线程并发的一种工作状态吧，哈哈。</p>
+
+      </section>
+    </article>
+    
+    
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+      <h1>
+        catalog
+      </h1>
+      <div class="content">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#限制"><span class="toc-number">2.</span> <span class="toc-text">限制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么做个小程序"><span class="toc-number">3.</span> <span class="toc-text">为什么做个小程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#消耗"><span class="toc-number">4.</span> <span class="toc-text">消耗</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#也许有用的方法"><span class="toc-number">5.</span> <span class="toc-text">也许有用的方法</span></a></li></ol>
+      </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy;
+      2019 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/ScrollMagic.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  document.body.addEventListener('touchstart', function () { });
+
+  // 文章图片预览
+  $("article img").each(function () {
+    var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+    $(this).wrapAll(strA);
+  });
+
+  // 目录联动
+  let tocLinkList = $('.toc-link')
+
+  let controller = new ScrollMagic.Controller({
+    globalSceneOptions: {
+      triggerHook: 0.01
+    }
+  })
+
+  tocLinkList.each(function (index, elem) {
+    let href = $(this).attr("href");
+    let nextHref = tocLinkList.eq(index + 1).attr("href");
+    let height = href && nextHref ? $(nextHref).offset().top - $(href).offset().top : 0
+
+    new ScrollMagic.Scene({ triggerElement: href })
+      .duration(height)
+      .setClassToggle(".toc [href='" + href + "']", 'active')
+      .addTo(controller)
+  })
+
+  window.addEventListener('load', function () {
+    // 目录联动 图片加载完成后从新计算
+    tocLinkList.each(function (index, elem) {
+      let href = $(this).attr("href");
+      let nextHref = tocLinkList.eq(index + 1).attr("href");
+      let height = href && nextHref ? $(nextHref).offset().top - $(href).offset().top : 0
+
+      new ScrollMagic.Scene({ triggerElement: href })
+        .duration(height)
+        .setClassToggle(".toc [href='" + href + "']", 'active')
+        .addTo(controller)
+    })
+  })
+</script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>

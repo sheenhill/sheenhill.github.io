@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang=>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="keywords" content>
+  
+    <link rel="icon" href="/imgs/favicon.ico">
+  
+    
+  <title>学习工作之旅 | 炜峄的博客</title>
+  <meta name="description" content="记录旅行，存储记忆 | ">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class="logo" href="/">
+      <span>炜峄的博客</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id="post">
+  <div class="content">
+    <article>
+      <section class="content markdown-body">
+        <h1>
+          学习工作之旅
+        </h1>
+        <div class="post-meta">
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>
+            2019/04/13</time>
+          
+          | <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/漫步于山间/">漫步于山间</a>
+  </div>
+
+
+
+          
+          
+          |
+          
+          <i class="fa fa-tag" aria-hidden="true"></i>
+          
+          
+  <a href="/tags/#日志" class="tag">日志</a>
+
+
+          
+        </div>
+        <blockquote>
+<p>学习工作日志（时间倒序记录）</p>
+</blockquote>
+<h2 id="2019年5月2日"><a href="#2019年5月2日" class="headerlink" title="2019年5月2日"></a>2019年5月2日</h2><p>看完这俩个博客让我受益匪浅：</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/4rPt7T59ifVTxg4dxCF50w" target="_blank" rel="noopener">JavaScript中的算法</a></li>
+<li><a href="https://github.com/lvwxx/blog/issues/1" target="_blank" rel="noopener">JavaScript中的数据结构</a></li>
+</ul>
+<p><em>笔记</em></p>
+<p><strong>函数柯里</strong></p>
+<blockquote>
+<p>在Lambda演算中有个小技巧：假如一个函数只能收一个参数，那么这个函数怎么实现加法呢，因为高阶函数是可以当参数传递和返回值的，所以问题就简化为：写一个只有一个参数的函数，而这个函数返回一个带参数的函数，这样就实现了能写两个参数的函数了（具体参见下边代码）——这就是所谓的柯里化（Currying，以逻辑学家Hsakell Curry命名），也可以理解为一种在处理函数过程中的逻辑思维方式。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//函数只能传一个参数时候实现加法</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">curry</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">b</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a + b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> add2 = curry(<span class="number">2</span>); <span class="comment">//add2也就是第一个参数为2的add版本</span></span><br><span class="line"><span class="built_in">console</span>.log(add2(<span class="number">3</span>))<span class="comment">//5</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>函数柯里化基本是在做这么一件事情：只传递给函数一部分参数来调用它，让它返回一个函数去处理剩下的参数。用公式表示就是我们要做的事情其实是</p>
+<p>fn(a,b,c,d)=&gt;fn(a)(b)(c)(d)；</p>
+<p>fn(a,b,c,d)=&gt;fn(a，b)(c)(d)；</p>
+<p>fn(a,b,c,d)=&gt;fn(a)(b，c，d)；</p>
+<p>……</p>
+<p>再或者这样：</p>
+<p>fn(a,b,c,d)=&gt;fn(a)(b)(c)(d)()；</p>
+<p>fn(a,b,c,d)=&gt;fn(a)；fn(b)；fn(c)；fn(d)；fn()；</p>
+</blockquote>
+<p>emmm </p>
+<p>我从以上差不多知道了函数柯里化是个什么玩意。</p>
+<p><strong>JS函数</strong></p>
+<p>js函数是一种对象。</p>
+<blockquote>
+<p>JavaScript是一种事件驱动的编程语言，它支持非阻塞操作。在浏览器内部，只有一个线程来运行所有的JavaScript代码,使用事件循环来注册事件,为了支持单线程环境中的异步性(为了节省CPU资源和增强web体验)，回调函数只有在调用堆栈为空时才会退出队列并执行。<strong>Promise</strong>依赖于这个事件驱动的体系结构，允许异步代码的“同步风格”执行，而不会阻塞其他操作。</p>
+</blockquote>
+<p>从这我知道了js就只有一个线程来运行代码，然后内部已经牛逼地用单线程实现了异步。</p>
+<blockquote>
+<p>在<strong>JavaScript</strong>中，算法只是一个函数，它将某个确定的数据结构输入转换为某个确定的数据结构输出。函数内部的逻辑决定了怎么转换。首先，输入和输出应该清楚地提前定义。这需要我们充分理解手上的问题，因为对问题的全面分析可以很自然地提出解决方案，而不需要编写任何代码。</p>
+<p>一旦完全理解了问题，就可以开始对解决方案进行思考，需要那些变量？ 有几种循环？ 有那些JavaScript内置方法可以提供帮助？需要考虑那些边缘情况？复杂或者重复的逻辑会导致代码十分的难以阅读和理解，可以考虑能否提出抽象成多个函数？一个算法通常上需要可扩展的。随着输入<strong>size</strong>的增加，函数将如何执行? 是否应该有某种缓存机制吗? 通常上，需要牺牲内存优化(空间)来换取性能提升(时间)。</p>
+</blockquote>
+<p>首先要把编程语言中基础的数据结构的函数烂熟于心，这样才会去用它，接着就是去深入了解它自带函数的具体实现，深入了解之后才会在不同的需求场景下灵活使用。</p>
+<h2 id="2019年4月13日"><a href="#2019年4月13日" class="headerlink" title="2019年4月13日"></a>2019年4月13日</h2><p>终于把多终端（win+ubuntu双系统）管理gitpage博客给实现了，可是在不知道是今天网不好，还是因为没优化ubuntu的网络，配置环境时下载东西贼慢，typora等编辑器也没下载成功，以至于我改这个md文件打了老长的命令行，关键我的文件名还是中文emmm，总之ubuntu下写日志不够优雅，不值得。</p>
+<blockquote>
+<p>这是一条写自vim的日志</p>
+</blockquote>
+<h2 id="2019年4月12日"><a href="#2019年4月12日" class="headerlink" title="2019年4月12日"></a>2019年4月12日</h2><ul>
+<li>学习多终端管理hexo搭建的gitpage博客，主要在于git的多分支，可以用一个分支放hexo产生的静态网页，另一个分支当作本地配置hexo环境的远程仓库，每用新的设备时只需要将环境仓库clone下来就可以了。</li>
+</ul>
+<p>注意：每在一个新的设备本地修改并提交了静态网页后，都得在其他设备中先clone下来环境分支clone下来，不然会导致修改出错。</p>
+<ul>
+<li style="list-style: none"><input type="checkbox"> 写了一个装双系统的博客，时间太久了，有点忘了，博客写的不够仔细，未发布</li>
+</ul>
+<h2 id="2019年4月9日"><a href="#2019年4月9日" class="headerlink" title="2019年4月9日"></a>2019年4月9日</h2><p>在没有完善UI设计的日子里，我一直通过思维导图，流程图来慢慢填补我想象中的小程序样式，本地函数和云函数经常修改，数据库经常重新设计。这也都没什么问题，因为整个项目并不大，所以修改起来也不麻烦。</p>
+<p>其实重要的是，整个项目的雏形还未出来，现在的代码也是页面的模块化假象与设计，这样让我写函数特别没底，所以我准备整理流程，根据假象用户一整套操作来写出一个框架，甚至先不写简单的函数，之后再逐个添加，完善。</p>
+<p>先实现雏形，进行单元测试，再重构。</p>
+
+      </section>
+    </article>
+    
+    
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+      <h1>
+        catalog
+      </h1>
+      <div class="content">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2019年5月2日"><span class="toc-number">1.</span> <span class="toc-text">2019年5月2日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2019年4月13日"><span class="toc-number">2.</span> <span class="toc-text">2019年4月13日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2019年4月12日"><span class="toc-number">3.</span> <span class="toc-text">2019年4月12日</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2019年4月9日"><span class="toc-number">4.</span> <span class="toc-text">2019年4月9日</span></a></li></ol>
+      </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy;
+      2019 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/ScrollMagic.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  document.body.addEventListener('touchstart', function () { });
+
+  // 文章图片预览
+  $("article img").each(function () {
+    var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+    $(this).wrapAll(strA);
+  });
+
+  // 目录联动
+  let tocLinkList = $('.toc-link')
+
+  let controller = new ScrollMagic.Controller({
+    globalSceneOptions: {
+      triggerHook: 0.01
+    }
+  })
+
+  tocLinkList.each(function (index, elem) {
+    let href = $(this).attr("href");
+    let nextHref = tocLinkList.eq(index + 1).attr("href");
+    let height = href && nextHref ? $(nextHref).offset().top - $(href).offset().top : 0
+
+    new ScrollMagic.Scene({ triggerElement: href })
+      .duration(height)
+      .setClassToggle(".toc [href='" + href + "']", 'active')
+      .addTo(controller)
+  })
+
+  window.addEventListener('load', function () {
+    // 目录联动 图片加载完成后从新计算
+    tocLinkList.each(function (index, elem) {
+      let href = $(this).attr("href");
+      let nextHref = tocLinkList.eq(index + 1).attr("href");
+      let height = href && nextHref ? $(nextHref).offset().top - $(href).offset().top : 0
+
+      new ScrollMagic.Scene({ triggerElement: href })
+        .duration(height)
+        .setClassToggle(".toc [href='" + href + "']", 'active')
+        .addTo(controller)
+    })
+  })
+</script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>

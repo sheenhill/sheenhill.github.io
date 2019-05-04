@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang=>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="keywords" content>
+  
+    <link rel="icon" href="/imgs/favicon.ico">
+  
+    
+  <title>最初的开始 | 炜峄的博客</title>
+  <meta name="description" content="这些都是我之前在搭建的网站上写的博客。看到博客上记录的时间，发现时间过得好快，然而我还是这么菜，，， | ">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class="logo" href="/">
+      <span>炜峄的博客</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id="post">
+  <div class="content">
+    <article>
+      <section class="content markdown-body">
+        <h1>
+          最初的开始
+        </h1>
+        <div class="post-meta">
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>
+            2019/04/17</time>
+          
+          | <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+
+
+          
+          
+          |
+          
+          <i class="fa fa-tags" aria-hidden="true"></i>
+          
+          
+  <a href="/tags/#Android" class="tag">Android</a>
+
+  <a href="/tags/#填坑记录" class="tag">填坑记录</a>
+
+
+          
+        </div>
+        <blockquote>
+<p>漫步于山间的路</p>
+</blockquote>
+<h2 id="bug解决！radiogroup中的radiobutton焦点不在第一个上面"><a href="#bug解决！radiogroup中的radiobutton焦点不在第一个上面" class="headerlink" title="bug解决！radiogroup中的radiobutton焦点不在第一个上面"></a>bug解决！radiogroup中的radiobutton焦点不在第一个上面</h2><blockquote>
+<p>2018-04-08 09:40:42</p>
+</blockquote>
+<p>bug说明：每次进入app时，预设的状态应为上图，之前的bug为：每次进入app“秒表”button为亮色，焦点不在第一个上。</p>
+<p>bug解决：<br>之前因为为了选择每个radiobutton时，有区别则在每个radiobutton中加了的属性，导致每次启动app时，默认为“时钟”界面，“秒表”字体却高亮。将后面三个radiobutton的</p>
+<p>android:checked=\”true”</p>
+<p>删除就解决了。<br>补充：<br>高亮字体代码：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">selector</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">android:state_checked</span>=<span class="string">"true"</span> <span class="attr">android:color</span>=<span class="string">"@color/colorThis"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">android:state_checked</span>=<span class="string">"false"</span> <span class="attr">android:color</span>=<span class="string">"@color/colorOthers"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">selector</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">color</span> <span class="attr">name</span>=<span class="string">"colorThis"</span>&gt;</span>#FFFFFF<span class="tag">&lt;/<span class="name">color</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">color</span> <span class="attr">name</span>=<span class="string">"colorOthers"</span>&gt;</span>#b1abae<span class="tag">&lt;/<span class="name">color</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>笨方法实现选择一个button后，改变整个radiogroup颜色：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (checkedId)&#123;</span><br><span class="line">    <span class="keyword">case</span> R.id.rb_mian_one:</span><br><span class="line">        vp_main_viewpager.setCurrentItem(<span class="number">0</span>);</span><br><span class="line">        buttonone.setBackgroundColor(Color.parseColor(<span class="string">"#4086DB"</span>));</span><br><span class="line">        buttontwo.setBackgroundColor(Color.parseColor(<span class="string">"#4086DB"</span>));</span><br><span class="line">        buttonthree.setBackgroundColor(Color.parseColor(<span class="string">"#4086DB"</span>));</span><br><span class="line">        buttonfour.setBackgroundColor(Color.parseColor(<span class="string">"#4086DB"</span>));</span><br><span class="line">        break;&lt;/pre&gt;</span><br><span class="line">&lt;pre&gt;<span class="keyword">case</span> R.id.rb_mian_two:</span><br><span class="line">    vp_main_viewpager.setCurrentItem(<span class="number">1</span>);</span><br><span class="line">    buttontwo.setBackgroundColor(Color.parseColor(<span class="string">"#62B54D"</span>));</span><br><span class="line">    buttonone.setBackgroundColor(Color.parseColor(<span class="string">"#62B54D"</span>));</span><br><span class="line">    buttonthree.setBackgroundColor(Color.parseColor(<span class="string">"#62B54D"</span>));</span><br><span class="line">    buttonfour.setBackgroundColor(Color.parseColor(<span class="string">"#62B54D"</span>));</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">case</span> R.id.rb_mian_three:</span><br><span class="line">    vp_main_viewpager.setCurrentItem(<span class="number">2</span>);</span><br><span class="line">    buttonthree.setBackgroundColor(Color.parseColor(<span class="string">"#C4B751"</span>));</span><br><span class="line">    buttontwo.setBackgroundColor(Color.parseColor(<span class="string">"#C4B751"</span>));</span><br><span class="line">    buttonone.setBackgroundColor(Color.parseColor(<span class="string">"#C4B751"</span>));</span><br><span class="line">    buttonfour.setBackgroundColor(Color.parseColor(<span class="string">"#C4B751"</span>));</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">case</span> R.id.rb_mian_four:</span><br><span class="line">    vp_main_viewpager.setCurrentItem(<span class="number">3</span>);</span><br><span class="line">    buttonfour.setBackgroundColor(Color.parseColor(<span class="string">"#1AB39F"</span>));</span><br><span class="line">    buttonone.setBackgroundColor(Color.parseColor(<span class="string">"#1AB39F"</span>));</span><br><span class="line">    buttontwo.setBackgroundColor(Color.parseColor(<span class="string">"#1AB39F"</span>));</span><br><span class="line">    buttonthree.setBackgroundColor(Color.parseColor(<span class="string">"#1AB39F"</span>));</span><br><span class="line">    <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure></p>
+<p>还需要在Activity的onCreate方法中初始化整个radiobutton：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">buttonone.setBackgroundColor(Color.parseColor(<span class="string">"#4086DB"</span>));</span><br><span class="line">buttontwo.setBackgroundColor(Color.parseColor(<span class="string">"#4086DB"</span>));</span><br><span class="line">buttonthree.setBackgroundColor(Color.parseColor(<span class="string">"#4086DB"</span>));</span><br><span class="line">buttonfour.setBackgroundColor(Color.parseColor(<span class="string">"#4086DB"</span>));</span><br></pre></td></tr></table></figure></p>
+<p>修改：直接更新radiogroup的颜色：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rg_main_radio.setBackgroundColor(Color.parseColor(<span class="string">"#4086DB"</span>));</span><br></pre></td></tr></table></figure></p>
+<p>bug说明：bug为：每次进入app的radio第二个button为亮色，焦点不在第一个上。<br>bug解决：<br>之前因为为了选择每个radiobutton时，有区别则在每个radiobutton中加了android:checked=”true”的属性</p>
+<p>将android:checked=”true”删除就解决了。</p>
+<h2 id="ANDROID-获取时间"><a href="#ANDROID-获取时间" class="headerlink" title="ANDROID 获取时间"></a>ANDROID 获取时间</h2><blockquote>
+<p>2018-04-07 22:28:05</p>
+</blockquote>
+<p>用Calendar获取会导致时间只显示一位数字：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Calendar c = Calendar.getInstance(); </span><br><span class="line">  tvTime.setText(String.format(<span class="string">"%d:%d:%d"</span>, c.get(Calendar.HOUR_OF_DAY),c.get(Calendar.MINUTE),c.get(Calendar.SECOND)));</span><br></pre></td></tr></table></figure>
+<p>实用方式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DateFormat df = <span class="keyword">new</span> SimpleDateFormat(\<span class="string">"HH:mm:ss\");</span></span><br><span class="line"><span class="string">df.format(new Date());</span></span><br></pre></td></tr></table></figure>
+<p>（显示俩位数字的时间，且默认24时制）<br>&nbsp;<br><a href="https://blog.csdn.net/chaoyu168/article/details/50729689" target="_blank" rel="noopener">转载出处</a></p>
+<h2 id="基于回调的事件传播——ANDROID"><a href="#基于回调的事件传播——ANDROID" class="headerlink" title="基于回调的事件传播——ANDROID"></a>基于回调的事件传播——ANDROID</h2><blockquote>
+<p>2017-10-30 22:59:17</p>
+<p>现在看来就是责任链设计模式，但是这个博主说的是很简单明了</p>
+</blockquote>
+<p>根据书籍《疯狂Android讲义 第二版》中介绍：<br>当该组件上发生某个按键被按下的事件时，Android系统最先触发的应该是该按键上绑定的事件监听器，接着才触发该组件提供的事件回调方法，然后还会传播到该组件所在的Activity。<br>也就是说，事件扩散的优先级应该是：事件监听器（listener）→事件回调方法(MyButton)→Activity的回调方法(Activity)</p>
+<p>该博客给我的启示：<a href="http://blog.csdn.net/qq844394093/article/details/50958741" target="_blank" rel="noopener">博客链接</a><br>Android的事件处理机制分为：<br>①监听 ②回调。<br>回调机制，就是用组件自身来处理自身的事件，而不是像监听机制一样使用事件监听器。<br>简单的说，就是写一个类，继承View类或者View类的子类（如Button等），然后重写父类中的某些方法。<br>该作者用了一个很形象的比喻：</p>
+<blockquote>
+<p>那就是事件的扩散（传播），比如<br>一个公司的前台业务员（事件监听器）接到一个尊贵的客人（事件Event），那么这个业务员就是负责端茶递水（处理事件），但是客人（事件Event）有大生意要谈，小小的业务员肯定做不了主，那么他就要向上级报告（return false），\”臣妾做不到啊\”，这时，部门的经理（重写的onTouchEvent）就出面解决问题， 如果还是解决不了，那么再向上级报告（return false），这样一直往上级报告，直到中间某一层解决了客人的需求（return true），那么就不用再向上级报告了。</p>
+</blockquote>
+<p>这个博主就很有灵性！</p>
+<h2 id="Android之坑——TextView-setText方法中参数只能为String型"><a href="#Android之坑——TextView-setText方法中参数只能为String型" class="headerlink" title="Android之坑——TextView.setText方法中参数只能为String型"></a>Android之坑——TextView.setText方法中参数只能为String型</h2><blockquote>
+<p>2018-08-02 09:39:34</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/com.example.roy.plan2000h E/AndroidRuntime: FATAL EXCEPTION: main</span><br><span class="line">    Process: com.example.roy.plan2000h, PID: 2595</span><br><span class="line">    android.content.res.Resources$NotFoundException: String resource ID #0x1</span><br><span class="line">        at android.content.res.Resources.getText(Resources.java:317)</span><br><span class="line">        at android.content.res.NubiaResources.getText(NubiaResources.java:146)</span><br><span class="line">        at android.widget.TextView.setText(TextView.java:4163)</span><br><span class="line">        at com.example.roy.plan2000h.MyRecyclerViewAdapter.onBindViewHolder(MyRecyclerViewAdapter.java:33)</span><br><span class="line">        at com.example.roy.plan2000h.MyRecyclerViewAdapter.onBindViewHolder(MyRecyclerViewAdapter.java:17)</span><br><span class="line">        at android.support.v7.widget.RecyclerView$Adapter.onBindViewHolder(RecyclerView.java:6673)</span><br></pre></td></tr></table></figure>
+<p> 一个bug耽误了1个小时，，，，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List&lt;HoursPlan&gt; hourAll=LitePal.select(<span class="string">"thisStudyTime"</span>).find(HoursPlan.class);</span><br><span class="line">        holder.tvStudyTime.setText(String.valueOf(hourAll.get(position).getThisStudyTime()));</span><br><span class="line">        <span class="keyword">int</span> count=<span class="number">2000</span>-hourAll.get(position).getThisStudyTime();</span><br><span class="line">        holder.tvResidualTime.setText(String.valueOf(count));</span><br></pre></td></tr></table></figure>
+<p>这次用litepal框架将数据持久化，并用recyclerView显示出来。</p>
+<p>第一次出现这个bug以为是我用litepal查询数据的代码和recyclerView逻辑代码的问题。</p>
+<p>然后就是以为我表中定义的thisStudyTime的数据类型有问题，本来是int型，改为了String型，再打算在getText（）中将参数强转成int型。。。。。hhhh</p>
+<p>当我再三用分别测试我的litepal代码，recyclerView代码和混合代码都没问题时，我就全用了String型参数，就没有bug了。</p>
+<p><a href="https://blog.csdn.net/north1989/article/details/52146254" target="_blank" rel="noopener">TextView.setText时参数只能是字符/字符串</a></p>
+<p>当我再次针对性地百度时，我才发现这个坑。<br>参数如果是float,会直接提示,不能使用float类型<br>参数如果是int类型,写的时候不会报错,但是编译的时候会报错!!<br>错误提示大致如下:notFoundResource String xxx<br>（引用自上面链接）<br>记一下，万一自己以后又忘了了呢.</p>
+<h2 id="AndroidStudio3-0踩坑实录"><a href="#AndroidStudio3-0踩坑实录" class="headerlink" title="AndroidStudio3.0踩坑实录"></a>AndroidStudio3.0踩坑实录</h2><blockquote>
+<p>2017-11-27 19:29:12</p>
+</blockquote>
+<p>当jar包正确导入，当jar包没有重复的包，然而还是确定是包的问题，那么原因很简单：<br>不要使用 implementation fileTree(include: [‘’<em>.jar’’], dir: ‘’libs’’)<br>或者 api fileTree(include: [‘’</em>.jar’’], dir: ‘’libs’’)（项目形成时会自动生成，需要删除）。<br>不然lib下的jar均按照api或者implementation方式引入到Module。<br>这个问题是我在使用okgo框架的时候发现的，我尝试着把 okgo，okhttp和okio都导入（其实不用只导入okgo包就好，其他俩个放在libs就可以了）。</p>
+<p>最后感谢这位，<a href="https://www.cnblogs.com/liushilin/p/6068098.html" target="_blank" rel="noopener">博客链接</a></p>
+<h2 id="Android异常：requestFeature-must-be-called-before-adding-content"><a href="#Android异常：requestFeature-must-be-called-before-adding-content" class="headerlink" title="Android异常：requestFeature() must be called before adding content"></a>Android异常：requestFeature() must be called before adding content</h2><blockquote>
+<p>2017-10-12 12:44:55</p>
+</blockquote>
+<p>解决方法：<br>MainActivity extends ActionBarActivity<br>改为<br>MainActivity extends Activity<br>&nbsp;<br>继承的是ActionBarActivity,改成继承Activity 完美解决！！<br>原因大概是，由于我用的是Google最新的开发工具，AndroidStudio<br>百度了很多都是：</p>
+<p><blockquote>super.onCreate(savedInstanceState);<br>requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);      //设置这种窗口特征只能在，上下两行代码之间。不然也会出现如题的报错。<br>requestWindowFeature(Window.FEATURE_PROGRESS);<br>setContentView(R.layout.activity_main);</blockquote><br>这次做的实例是显示在标题上的进度条，但是在5.0中没有Holo主题，需要引入value11（这个主题是3.0的）</p>
+<h2 id="使用9Patch图片作背景"><a href="#使用9Patch图片作背景" class="headerlink" title="使用9Patch图片作背景"></a>使用9Patch图片作背景</h2><blockquote>
+<p>‘2017-10-07 09:50:16’</p>
+</blockquote>
+<p>Android Studio版本：1.0.1 Build 135.1641136<br>当按钮的内容太多时，Android会自动缩放整张图片，以保证背景图片能够覆盖整个按钮。但这种视觉效果可能不太美观。<br>9Patch图片可以实现只缩放图片中的某个部分的效果。<br>这种图片以 .9.png 结尾。<br>使用方法：</p>
+<ul>
+<li><p>在本机上找到Android SDK包的安装路径，进入tools文件夹，双击打开draw9patch.bat；</p>
+</li>
+<li><p>将准备后的png图片拖拽到该窗口中；</p>
+</li>
+<li><p>在图片边缘点击左键，绘制出黑线，即图片需要被拉伸的部分；(如需擦除，可按住shift键的同时点击鼠标左键)</p>
+</li>
+<li><p>保存，生成后缀名为 .9.png 的文件。</p>
+</li>
+<li><p>也可将图片的后缀名直接改成.9.png，放入drawable文件夹中在Android Studio直接打开编辑。</p>
+</li>
+</ul>
+<p>问题：<br>Android编译遇到点9图片错误：<em>No marked region found along edge. - Found along left edge.</em><br>解决：<br>这个是因为点9图的某一个边（上下左右任何一边）没有涂黑（绘制黑线）。导致编译失败。<br>每一边都涂黑，涂黑多少看需要，没有位置涂黑的话，将图片ps一下，画布调大，再改。</p>
+<h2 id="！！！无法触发setOnItemSelectedListener事件"><a href="#！！！无法触发setOnItemSelectedListener事件" class="headerlink" title="！！！无法触发setOnItemSelectedListener事件"></a>！！！无法触发setOnItemSelectedListener事件</h2><blockquote>
+<p>2017-07-18 04:08:47</p>
+</blockquote>
+<p><ul><br>     <li> ListView 中，每一个Item都有俩种状态，被选中和未被选中的状态。</li><br>     <li> 从名字上看，OnItemClickListener一个是点击了就触发了，setOnItemSelectedListener是选中项发生改变就触发。</li><br>     <li> setOnItemClickListener()指的是单击一个条目：</li><br></ul></p>
+<p><div>    如果你从鼠标滚动过渡到单击一个条目，都会在调用setOnItemClickListener()。<br>如果你单击了一个条目之前没选择任何条目，所 以会触发一个onNothingSelected()方法。</div><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">list.setOnItemClickListener(<span class="keyword">new</span> AdapterView.OnItemClickListener() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onItemClick</span><span class="params">(AdapterView&amp;lt;?&amp;gt; parent, View view, <span class="keyword">int</span> position, <span class="keyword">long</span> id)</span> </span>&#123;</span><br><span class="line">        System.out.println(names[position]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">list.setOnItemSelectedListener(<span class="keyword">new</span> AdapterView.OnItemSelectedListener() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onItemSelected</span><span class="params">(AdapterView&amp;lt;?&amp;gt; parent, View view, <span class="keyword">int</span> position, <span class="keyword">long</span> id)</span> </span>&#123;</span><br><span class="line">        System.out.println(names[position]+<span class="string">"被选中了"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNothingSelected</span><span class="params">(AdapterView&amp;lt;?&amp;gt; adapterView)</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>可是我的真机为什么触发不了（logcat没有显示“被选中了”）！！！</p>
+<p></p><h4>解释一：</h4><br><em>一般这个问题都是对OnItemSelectedListener这个事件的误读引起的，OnItemSelectedListener是用来监听【选中某一项】的事件，不是【点击】某一项的事件，虽然点击能引发选中事件，但不是必然的，一般用按键或者鼠标滚轮移动焦点都会产生这个选中事件。</em><br>(也就是说，在不触屏（不点击）的情况下，在电视或者手机上做一个模拟生成选中某一项的按钮，便会产生事件？)<p></p>
+<h2 id="Android小问题，AS的系统为Handler引用错误类"><a href="#Android小问题，AS的系统为Handler引用错误类" class="headerlink" title="Android小问题，AS的系统为Handler引用错误类"></a>Android小问题，AS的系统为Handler引用错误类</h2><blockquote>
+<p>‘2017-09-26 20:36:11’</p>
+</blockquote>
+<p>Error:(35, 35) 错误: &lt;匿名com.example.a.framelayouttest.MainActivity$1&gt;不是抽象的, 并且未覆盖Handler中的抽象方法publish(LogRecord)</p>
+<p>eg:Handler handler=new Handler()</p>
+<p>错误原因：<br>自动import系统错将java.util.logging.Handler包import进来了；<br>解决方法：<br>手动去掉import java.util.logging.Handler;<br>手动加上import android.os.Handler;</p>
+<h2 id="今天不经意间碰到了Installation-failed-due-to-invalid-APK-file-问题"><a href="#今天不经意间碰到了Installation-failed-due-to-invalid-APK-file-问题" class="headerlink" title="今天不经意间碰到了Installation failed due to invalid APK file!问题"></a>今天不经意间碰到了Installation failed due to invalid APK file!问题</h2><blockquote>
+<p>‘2017-06-06 16:32:27’</p>
+</blockquote>
+<p>代码没有错误,但是运行时会出现下面的问题</p>
+<p>Installing test.apk…\r\nInstallation failed due to invalid APK file!<br>Please check logcat output for more details.</p>
+<p>导致安装不成功。</p>
+<p>最终我找到问题所在了.发现我的包名前面加了一条下划线“_1code”，如果新建的工程以数字加下划线开头（工程名为：2_1code），会导致包名前面出现一个下划线。</p>
+<p>所以重新建一个工程，同样的代码运行就正常了。</p>
+<blockquote>
+<p>这个命名的坑，也是绝了</p>
+</blockquote>
+
+      </section>
+    </article>
+    
+    
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+      <h1>
+        catalog
+      </h1>
+      <div class="content">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#bug解决！radiogroup中的radiobutton焦点不在第一个上面"><span class="toc-number">1.</span> <span class="toc-text">bug解决！radiogroup中的radiobutton焦点不在第一个上面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ANDROID-获取时间"><span class="toc-number">2.</span> <span class="toc-text">ANDROID 获取时间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于回调的事件传播——ANDROID"><span class="toc-number">3.</span> <span class="toc-text">基于回调的事件传播——ANDROID</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Android之坑——TextView-setText方法中参数只能为String型"><span class="toc-number">4.</span> <span class="toc-text">Android之坑——TextView.setText方法中参数只能为String型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AndroidStudio3-0踩坑实录"><span class="toc-number">5.</span> <span class="toc-text">AndroidStudio3.0踩坑实录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Android异常：requestFeature-must-be-called-before-adding-content"><span class="toc-number">6.</span> <span class="toc-text">Android异常：requestFeature() must be called before adding content</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用9Patch图片作背景"><span class="toc-number">7.</span> <span class="toc-text">使用9Patch图片作背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#！！！无法触发setOnItemSelectedListener事件"><span class="toc-number">8.</span> <span class="toc-text">！！！无法触发setOnItemSelectedListener事件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">8.0.1.</span> <span class="toc-text">解释一：</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#Android小问题，AS的系统为Handler引用错误类"><span class="toc-number">9.</span> <span class="toc-text">Android小问题，AS的系统为Handler引用错误类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#今天不经意间碰到了Installation-failed-due-to-invalid-APK-file-问题"><span class="toc-number">10.</span> <span class="toc-text">今天不经意间碰到了Installation failed due to invalid APK file!问题</span></a></li>
+      </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy;
+      2019 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/ScrollMagic.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  document.body.addEventListener('touchstart', function () { });
+
+  // 文章图片预览
+  $("article img").each(function () {
+    var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+    $(this).wrapAll(strA);
+  });
+
+  // 目录联动
+  let tocLinkList = $('.toc-link')
+
+  let controller = new ScrollMagic.Controller({
+    globalSceneOptions: {
+      triggerHook: 0.01
+    }
+  })
+
+  tocLinkList.each(function (index, elem) {
+    let href = $(this).attr("href");
+    let nextHref = tocLinkList.eq(index + 1).attr("href");
+    let height = href && nextHref ? $(nextHref).offset().top - $(href).offset().top : 0
+
+    new ScrollMagic.Scene({ triggerElement: href })
+      .duration(height)
+      .setClassToggle(".toc [href='" + href + "']", 'active')
+      .addTo(controller)
+  })
+
+  window.addEventListener('load', function () {
+    // 目录联动 图片加载完成后从新计算
+    tocLinkList.each(function (index, elem) {
+      let href = $(this).attr("href");
+      let nextHref = tocLinkList.eq(index + 1).attr("href");
+      let height = href && nextHref ? $(nextHref).offset().top - $(href).offset().top : 0
+
+      new ScrollMagic.Scene({ triggerElement: href })
+        .duration(height)
+        .setClassToggle(".toc [href='" + href + "']", 'active')
+        .addTo(controller)
+    })
+  })
+</script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>
