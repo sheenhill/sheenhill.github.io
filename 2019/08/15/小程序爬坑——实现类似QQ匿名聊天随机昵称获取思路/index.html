@@ -9,8 +9,8 @@
     <link rel="icon" href="/imgs/favicon.ico">
   
     
-  <title>理解——模式匹配KMP算法预处理 | 炜峄的博客</title>
-  <meta name="description" content="终于找到一种可以理解的KMP算法获取next[j]的值的方法了。 | ">
+  <title>小程序爬坑——实现类似QQ匿名聊天随机昵称获取思路 | 炜峄的博客</title>
+  <meta name="description" content="每次重构都是折磨自己的开始，，，， | ">
   <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -57,16 +57,16 @@
     <article>
       <section class="content markdown-body">
         <h1>
-          理解——模式匹配KMP算法预处理
+          小程序爬坑——实现类似QQ匿名聊天随机昵称获取思路
         </h1>
         <div class="post-meta">
           <i class="fa fa-calendar" aria-hidden="true"></i> <time>
-            2019/04/26</time>
+            2019/08/15</time>
           
           | <i class="fa fa-folder-open-o" aria-hidden="true"></i>
           
   <div class="article-category">
-    <a class="article-category-link" href="/categories/数据结构与算法/">数据结构与算法</a>
+    <a class="article-category-link" href="/categories/微信小程序/">微信小程序</a>
   </div>
 
 
@@ -78,68 +78,17 @@
           <i class="fa fa-tags" aria-hidden="true"></i>
           
           
-  <a href="/tags/#数据结构" class="tag">数据结构</a>
+  <a href="/tags/#日志" class="tag">日志</a>
 
-  <a href="/tags/#笔记" class="tag">笔记</a>
+  <a href="/tags/#微信小程序" class="tag">微信小程序</a>
+
+  <a href="/tags/#思考" class="tag">思考</a>
 
 
           
         </div>
-        <p>KMP的预处理，是对传统暴力的串的模式匹配算法的一种改进，使其不需回溯。</p>
-<p>我一直无法理解KMP中获取next[j]的值方法，现在看了这篇文章（<a href="https://mp.weixin.qq.com/s/aC7XEsz3eGSWj3oWHpQE7w" target="_blank" rel="noopener">对字符串匹配算法的一点理解</a>）之后终于会了。</p>
-<p>这里记一下我的笔记。</p>
-<p>为了计算Next，需要先了解一下前缀，后缀和PMT的概念：</p>
-<p>前缀：如果字符串A和B，存在A=BS，其中S是任意的非空字符串，那就称B为A的前缀。例如，”Harry”的前缀包括{”H”, ”Ha”, ”Har”, ”Harr”}，我们把所有前缀组成的集合，称为字符串的前缀集合。</p>
-<p>后缀：同样可以定义后缀A=SB，其中S是任意的非空字符串，那就称B为A的后缀，例如，”Potter”的后缀包括{”otter”, ”tter”, ”ter”, ”er”, ”r”}，然后把所有后缀组成的集合，称为字符串的后缀集合。</p>
-<p><strong>要注意的是，字符串本身并不是自己的后缀。</strong></p>
-<p><em>我一看到这个前缀后缀的定义，就发现跟左右逆元好像啊。通过名称的解释也更容易理解怎么计算next了。</em></p>
-<p>PMT：字符串的前缀集合与后缀集合的交集中最长元素的长度。比如，对于字符串”ababa”，它的前缀集合为{”a”, ”ab”, ”aba”, ”abab”}，它的后缀集合为{”baba”, ”aba”, ”ba”, ”a”}，两个集合的交集为{”a”, ”aba”}，其中最长的元素为”aba”，长度为3。</p>
-<p>例如：ababca，当index=3时（前面省略），前缀与后缀最长相等为“ab”，pmt=2；当index=4是，无相等前后缀，pmt=0.</p>
-<p>next值就是把整个pmt往后推一位，当index=0时，next=-1,其说明模式串在str[0]之前没有任何用于加速匹配的信息，下一趟应从str的开头即为next++(index=0)处开始匹配，这是为了在算法中更方便使用。</p>
-<p>我们可以用表格更清晰地看出：</p>
-<table>
-<thead>
-<tr>
-<th>str：</th>
-<th>a</th>
-<th>b</th>
-<th>a</th>
-<th>b</th>
-<th>c</th>
-<th>a</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>index：</td>
-<td>0</td>
-<td>1</td>
-<td>2</td>
-<td>3</td>
-<td>4</td>
-<td>5</td>
-</tr>
-<tr>
-<td>pmt:</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>2</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>next:</td>
-<td>-1</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>2</td>
-<td>0</td>
-</tr>
-</tbody>
-</table>
-<p>当模式串的某一个字母失配的时候，根据next表，做相应的位移，避免指针回溯。这就是KMP对暴力匹配算法的优化。</p>
+        <p>《天天留言墙》的起始想法是做一个供朋友们吐槽的小程序，我一开始本来打算完全匿名吐槽，但是为了趣味性，我打算后期再加上可选择实名吐槽或者匿名吐槽。</p>
+<p>在获取匿名昵称这方面，我从最开始做这个东西时为了方便随便用的一个不严谨的算法，到现在更迭了几个版本。现在好好记录一下历程，也许能在理清自己思路的同时，还能找到更好的办法呢。</p>
 
       </section>
     </article>
