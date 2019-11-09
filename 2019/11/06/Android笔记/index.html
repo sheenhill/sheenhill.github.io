@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang=>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="keywords" content>
+  
+    <link rel="icon" href="/imgs/favicon.ico">
+  
+    
+  <title>Android笔记 | 炜峄的博客</title>
+  <meta name="description" content="感觉需要记得Android知识点 | ">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class="logo" href="/">
+      <span>炜峄的博客</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id="post">
+  <div class="content">
+    <article>
+      <section class="content markdown-body">
+        <h1>
+          Android笔记
+        </h1>
+        <div class="post-meta">
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>
+            2019/11/06</time>
+          
+          | <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+
+
+          
+          
+          |
+          
+          <i class="fa fa-tags" aria-hidden="true"></i>
+          
+          
+  <a href="/tags/#知识点" class="tag">知识点</a>
+
+  <a href="/tags/#Android" class="tag">Android</a>
+
+
+          
+        </div>
+        <h2 id="抽象布局中ShowIn属性作用"><a href="#抽象布局中ShowIn属性作用" class="headerlink" title="抽象布局中ShowIn属性作用"></a>抽象布局中ShowIn属性作用</h2><p>XML中的tools：showIn属性是一个特殊属性，在编译过程中会删除该属性，并且仅在设计时在Android Studio中使用该属性（它指定了包含此文件的布局），因此您可以在显示该文件时对其进行预览（和编辑） 嵌入到父版式中。</p>
+<h2 id="抽象布局-lt-Include-注意事项"><a href="#抽象布局-lt-Include-注意事项" class="headerlink" title="抽象布局&lt;Include>注意事项"></a>抽象布局&lt;Include>注意事项</h2><p>在使用include标签引入其他布局时，想要重写其布局属性，则必须覆盖android：layout_height和android：layout_width才能使其他布局属性生效。</p>
+<h2 id="RecyclerView优化"><a href="#RecyclerView优化" class="headerlink" title="RecyclerView优化"></a>RecyclerView优化</h2><p>后端传过来的数据，在javabean类中就把数据给包装成需要展示的样式。在RV的onBindViewHolder做太多判断（超过3个）会导致RV在渲染时有明显卡顿。例如可以在javabea类增加一些bool型的属性，将判断放在RV渲染的外部来实现。</p>
+
+      </section>
+    </article>
+    
+    
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+      <h1>
+        catalog
+      </h1>
+      <div class="content">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#抽象布局中ShowIn属性作用"><span class="toc-number">1.</span> <span class="toc-text">抽象布局中ShowIn属性作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#抽象布局-lt-Include-注意事项"><span class="toc-number">2.</span> <span class="toc-text">抽象布局&lt;Include&gt;注意事项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RecyclerView优化"><span class="toc-number">3.</span> <span class="toc-text">RecyclerView优化</span></a></li></ol>
+      </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy;
+      2019 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/ScrollMagic.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  document.body.addEventListener('touchstart', function () { });
+
+  // 文章图片预览
+  $("article img").each(function () {
+    var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+    $(this).wrapAll(strA);
+  });
+
+  // 目录联动
+  let tocLinkList = $('.toc-link')
+
+  let controller = new ScrollMagic.Controller({
+    globalSceneOptions: {
+      triggerHook: 0.01
+    }
+  })
+
+  tocLinkList.each(function (index, elem) {
+    let href = $(this).attr("href");
+    let nextHref = tocLinkList.eq(index + 1).attr("href");
+    let height = href && nextHref ? $(nextHref).offset().top - $(href).offset().top : 0
+
+    new ScrollMagic.Scene({ triggerElement: href })
+      .duration(height)
+      .setClassToggle(".toc [href='" + href + "']", 'active')
+      .addTo(controller)
+  })
+
+  window.addEventListener('load', function () {
+    // 目录联动 图片加载完成后从新计算
+    tocLinkList.each(function (index, elem) {
+      let href = $(this).attr("href");
+      let nextHref = tocLinkList.eq(index + 1).attr("href");
+      let height = href && nextHref ? $(nextHref).offset().top - $(href).offset().top : 0
+
+      new ScrollMagic.Scene({ triggerElement: href })
+        .duration(height)
+        .setClassToggle(".toc [href='" + href + "']", 'active')
+        .addTo(controller)
+    })
+  })
+</script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>
