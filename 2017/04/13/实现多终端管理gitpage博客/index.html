@@ -9,8 +9,8 @@
     <link rel="icon" href="/imgs/favicon.ico">
   
     
-  <title>Android笔记 | 炜峄的博客</title>
-  <meta name="description" content="感觉需要记的Android知识点 | ">
+  <title>实现多终端管理gitpage博客 | 炜峄的博客</title>
+  <meta name="description" content="我发现这种方式对并不实用 | ">
   <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -57,16 +57,16 @@
     <article>
       <section class="content markdown-body">
         <h1>
-          Android笔记
+          实现多终端管理gitpage博客
         </h1>
         <div class="post-meta">
           <i class="fa fa-calendar" aria-hidden="true"></i> <time>
-            2019/11/06</time>
+            2017/04/13</time>
           
           | <i class="fa fa-folder-open-o" aria-hidden="true"></i>
           
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Android/">Android</a>
+    <a class="article-category-link" href="/categories/漫步于山间/">漫步于山间</a>
   </div>
 
 
@@ -75,19 +75,25 @@
           
           |
           
-          <i class="fa fa-tags" aria-hidden="true"></i>
+          <i class="fa fa-tag" aria-hidden="true"></i>
           
           
-  <a href="/tags/#知识点" class="tag">知识点</a>
-
-  <a href="/tags/#Android" class="tag">Android</a>
+  <a href="/tags/#工具" class="tag">工具</a>
 
 
           
         </div>
-        <h2 id="抽象布局中ShowIn属性作用"><a href="#抽象布局中ShowIn属性作用" class="headerlink" title="抽象布局中ShowIn属性作用"></a>抽象布局中ShowIn属性作用</h2><p>XML中的tools：showIn属性是一个特殊属性，在编译过程中会删除该属性，并且仅在设计时在Android Studio中使用该属性（它指定了包含此文件的布局），因此您可以在显示该文件时对其进行预览（和编辑） 嵌入到父版式中。</p>
-<h2 id="抽象布局-lt-Include-注意事项"><a href="#抽象布局-lt-Include-注意事项" class="headerlink" title="抽象布局&lt;Include>注意事项"></a>抽象布局&lt;Include>注意事项</h2><p>在使用include标签引入其他布局时，想要重写其布局属性，则必须覆盖android：layout_height和android：layout_width才能使其他布局属性生效。</p>
-<h2 id="RecyclerView优化"><a href="#RecyclerView优化" class="headerlink" title="RecyclerView优化"></a>RecyclerView优化</h2><p>后端传过来的数据，在javabean类中就把数据给包装成需要展示的样式。在RV的onBindViewHolder做太多判断（超过3个）会导致RV在渲染时有明显卡顿。例如可以在javabean类加空属性，在activity或者fragment中就把要传到RV的list进行筛选和过滤时给属性赋值，用作判断。将判断组合等操作放在RV渲染的外部来实现，能明显优化RV流畅度。</p>
+        <p>详细操作博客链接：<a href="https://blog.csdn.net/ZmeiXuan/article/details/78339376" target="_blank" rel="noopener">hexo多终端管理</a></p>
+<p>本想着自己双系统可以共同管理自己的博客，结果发现在ubuntu下的写作有些失望。</p>
+<p>但是折腾了一番，对git更熟悉了，也是没浪费时间的。</p>
+<p>这次，我貌似有点能感受到git的分支和中间层这些设计的强大了。</p>
+<p>在这我就整理一下自己的思路吧，上面链接博客给的步骤已经很详细了。</p>
+<p>本来只是用gitpage+git+hexo实现一个博客管理，这是个很酷也很划算的活，但是最近刚好装了双系统，那就折腾一下多终端的管理博客呗。想着跟github的相关的东西肯定支持多用户多终端共同维护和管理的啊。于是，我找啊找，终于找到了，只是没有找到想象中的那么多的教程博客。</p>
+<p>首先我们搭建的博客是通过hexo产生静态网页部署到gitpage中的，所有产生的静态网页在一个仓库的分支里面，要是想多终端管理一个界面，就需要本地产生静态网页的这个hexo环境能完完整整的同步其它的终端里面，网上的思路大概都是在改仓库再开一个分支，想整个hexo环境中必要的文件夹给push上去，每次修改的时候需要pull下来，然后再push上去，，，，，</p>
+<p>对于多终端是个不错的办法，用github自带本地与远程的融合，而保持hexo环境的一致。</p>
+<p>但是就一个终端显然没必要这么麻烦，平时更新个博客俩行命令行就解决了。</p>
+<p>因为在上面的链接博客中，多终端管理博客会将github中该仓库的默认分支设置拥有hexo完整环境的那个分支。所以，打算为“单兵作战”的我，又换了回来，希望你们不要忽略这个细节。</p>
+<p>但是我在第一次配置好主题后，还是会用一个分支保持hexo完整环境的状态，因为保不齐以后有其他需求，而且配置基础的hexo环境还是挺麻烦的。虽然我又选择用一个终端写博客，但那个分支可以用作备用。</p>
 
       </section>
     </article>
@@ -95,15 +101,6 @@
     
   </div>
   <aside>
-    
-    <div class="toc-container">
-      <h1>
-        catalog
-      </h1>
-      <div class="content">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#抽象布局中ShowIn属性作用"><span class="toc-number">1.</span> <span class="toc-text">抽象布局中ShowIn属性作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#抽象布局-lt-Include-注意事项"><span class="toc-number">2.</span> <span class="toc-text">抽象布局&lt;Include&gt;注意事项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RecyclerView优化"><span class="toc-number">3.</span> <span class="toc-text">RecyclerView优化</span></a></li></ol>
-      </div>
-    </div>
     
   </aside>
 </main>
