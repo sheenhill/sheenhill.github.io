@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang=>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="keywords" content>
+  
+    <link rel="icon" href="/imgs/favicon.ico">
+  
+    
+  <title>小程序填坑集合 | 炜峄的博客</title>
+  <meta name="description" content="摸索《天天留言墙》时走过的坑 | ">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class="logo" href="/">
+      <span>炜峄的博客</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id="post">
+  <div class="content">
+    <article>
+      <section class="content markdown-body">
+        <h1>
+          小程序填坑集合
+        </h1>
+        <div class="post-meta">
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>
+            2019/07/14</time>
+          
+          | <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/微信小程序/">微信小程序</a>
+  </div>
+
+
+
+          
+          
+          |
+          
+          <i class="fa fa-tags" aria-hidden="true"></i>
+          
+          
+  <a href="/tags/#微信小程序" class="tag">微信小程序</a>
+
+  <a href="/tags/#js" class="tag">js</a>
+
+  <a href="/tags/#填坑" class="tag">填坑</a>
+
+
+          
+        </div>
+        <h2 id="先实现雏形，进行单元测试，再在迭代的过程中重构"><a href="#先实现雏形，进行单元测试，再在迭代的过程中重构" class="headerlink" title="先实现雏形，进行单元测试，再在迭代的过程中重构"></a><em>先实现雏形，进行单元测试，再在迭代的过程中重构</em></h2><h2 id="重构技巧：小步前进，频繁测试。"><a href="#重构技巧：小步前进，频繁测试。" class="headerlink" title="重构技巧：小步前进，频繁测试。"></a>重构技巧：小步前进，频繁测试。</h2><h2 id="使用console-log-该页面-xml-””-来打log，有助于查bug定位"><a href="#使用console-log-该页面-xml-””-来打log，有助于查bug定位" class="headerlink" title="使用console.log([该页面].xml,**””**)来打log，有助于查bug定位"></a><strong>使用console.log([该页面].xml,**</strong>””<strong>**)来打log，有助于查bug定位</strong></h2><h2 id="路由："><a href="#路由：" class="headerlink" title="路由："></a><strong>路由：</strong></h2><p><strong>使用 wx.navigateBack()</strong> 可以退出当前页面栈的最顶上页面</p>
+<p>使用<strong>wx.navigateTo({ url:</strong> <strong>‘</strong> <strong>‘**</strong>})** 保留当前页面，跳转到应用内的某个页面。但是不能跳到 tabbar 页面。使用 <a href="https://developers.weixin.qq.com/miniprogram/dev/api/wx.navigateBack.html" target="_blank" rel="noopener">wx.navigateBack</a> 可以返回到原页面。小程序中页面栈最多十层。</p>
+<p>使用<strong>wx.redirectTo({ url:</strong> <strong>‘</strong> <strong>‘**</strong>})** 是替换当前页，当页面栈到达10层没法再新增的时候，往往就是使用redirectTo这个API进行页面跳转。</p>
+<p><strong>使用wx.switchTab({ url:</strong> <strong>‘</strong> <strong>‘**</strong>}),<strong>跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面</strong>使用wx.reLaunch({ url:<strong> </strong>‘<strong> </strong>‘<strong>**}),</strong>关闭所有页面，打开到应用内的某个页面,在<strong>redirectTo无法跳转到tab页时使用，例如授权页</strong></p>
+<h2 id="强制类型转换-："><a href="#强制类型转换-：" class="headerlink" title="强制类型转换 ："></a><strong>强制类型转换</strong> <strong>：</strong></h2><p>ECMAScript中可用的Boolean强制类型转换如下：<br>把给定的值转换成Boolean型。 （if中也会强制转换）<br>当要转换的值是至少有一个字符的字符串、非0数字或对象时，Boolean()函数将返回true。如果该值是空字符串、数字0、undefined或null,它将返回false。<br>如： </p>
+<p>var b1 = Boolean(“”); // false;   </p>
+<p>var b2 = Boolean(“hi”);//true   </p>
+<p>var b3 = Boolean(100);//true   </p>
+<p>var b4 = Boolean(null);//false   </p>
+<p>var b5 = Boolean(0);//false   </p>
+<p>var b6 = Boolean(new Object());//true  </p>
+<h2 id="获取用户openid："><a href="#获取用户openid：" class="headerlink" title="获取用户openid："></a><strong>获取用户openid：</strong></h2><p>云开发的云函数的独特优势在于与微信登录鉴权的无缝整合。当小程序端调用云函数时，云函数的传入参数中会被注入小程序端用户的 openid，开发者无需校验 openid 的正确性，因为微信已经完成了这部分鉴权，开发者可以直接使用该 openid。与 openid 一起同时注入云函数的还有小程序的 appid。从小程序端调用云函数时，开发者可以在云函数内使用 <a href="https://developers.weixin.qq.com/miniprogram/dev/wxcloud/guide/functions/wx-server-sdk.html" target="_blank" rel="noopener">wx-server-sdk</a> 提供的 <a href="https://developers.weixin.qq.com/miniprogram/dev/wxcloud/reference-server-api/utils/getWXContext.html" target="_blank" rel="noopener">getWXContext</a> 方法获取到每次调用的上下文（appid、openid 等），无需维护复杂的鉴权机制，即可获取天然可信任的用户登录态（openid）。</p>
+<p><strong>也就是说从使用云开发的数据库只需要不需要获取登录态就可以直接用云函数来获取openid，用以和账号绑定，在云函数来写账号绑定事件更方便</strong> </p>
+<h2 id="云开发数据库读取权限"><a href="#云开发数据库读取权限" class="headerlink" title="云开发数据库读取权限"></a>云开发数据库读取权限</h2><h2 id="Await（云函数中数据库操作）"><a href="#Await（云函数中数据库操作）" class="headerlink" title="Await（云函数中数据库操作）"></a><strong>Await（云函数中数据库操作）</strong></h2><p><strong>语法如下：</strong></p>
+<p><strong>// 只能在async函数内部使用</strong></p>
+<p><strong>let value = await promise</strong></p>
+<p><strong>关键词await可以让JavaScript进行等待，直到一个promise执行并返回它的结果，JavaScript才会继续往下执行。</strong></p>
+<p><strong>索引属性保证了增加记录**</strong>user_info<strong><strong>的字段</strong></strong>wallNum<strong>**的唯一性，且非空</strong></p>
+<p><strong>唯一性限制</strong></p>
+<p><strong>创建索引时可以指定增加唯一性限制，具有唯一性限制的索引会要求被索引集合不能存在被索引字段值都相同的两个记录。即对任意具有唯一性限制的索引 I，假设其索引字段为 &lt;F1, F2, …, Fn&gt;，则对集合 S 中任意的两个记录 R1 和 R2，必须满足条件 R1.F1 != R2.F1 &amp;&amp; R1.F2 != R2.F2 &amp;&amp; … &amp;&amp; R1.Fn != R2.Fn。需特别注意的是，假如记录中不存在某个字段，则对索引字段来说其值默认为 null，如果索引有唯一性限制，则不允许存在两个或以上的该字段为空 / 不存在该字段的记录。</strong></p>
+<p><strong>在创建索引的时候索引属性选择 唯一 即可添加唯一性限制。</strong></p>
+<h2 id="本地使用time函数"><a href="#本地使用time函数" class="headerlink" title="本地使用time函数"></a><strong>本地使用time函数</strong></h2><p><strong>&lt;!–</strong></p>
+<p><strong>{</strong></p>
+<p>  <strong>time: (new Date()).toString()</strong></p>
+<p><strong>}</strong></p>
+<p><strong>–&gt;</strong></p>
+<p><strong><text>当前时间：</text></strong></p>
+<h2 id="小程序中Const的坑"><a href="#小程序中Const的坑" class="headerlink" title="小程序中Const的坑"></a><strong>小程序中Const的坑</strong></h2><p>代码如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> res = wx.getStorageInfoSync()  <span class="comment">//此处res由const声明会报错，应该改为 var res=....</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"本地缓存："</span> + res.keys)</span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line"><span class="built_in">console</span>.error(<span class="string">'查询缓存数据失败。'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (res.currentSize &gt; <span class="number">0</span>) &#123;           <span class="comment">// 小程序无法识别res这个变量，使用var声明就可以了</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"本地有缓存。"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="提高列表渲染效率，使用wx-key"><a href="#提高列表渲染效率，使用wx-key" class="headerlink" title="提高列表渲染效率，使用wx:key"></a>提高列表渲染效率，使用wx:key</h2><p>当数据改变触发渲染层重新渲染的时候，会<strong>校正带有 key 的组件</strong>，框架会确保他们被<strong>重新排序</strong>，而<strong>不是重新创建</strong>，以确保使组件保持自身的状态，并且<strong>提高列表渲染时的效率</strong>。</p>
+<p>在vue中key属性也是一样，用来保证高效渲染虚拟dom树。第一点，在同层的节点中，在有key属性的层节点处可以更高效的插入与删除；第二点，在对一个有key属性的节点修改值，可以让对dom树减少删除该节点增加一个新节点的操作，可以直接修改其值，而不需要重新渲染，即重新排序，而不是重新创建。</p>
+<h2 id="使用-data-‘-‘-来绑定item，并传参"><a href="#使用-data-‘-‘-来绑定item，并传参" class="headerlink" title="使用 data- ‘ ‘=  来绑定item，并传参"></a>使用 data- ‘ ‘=  来绑定item，并传参</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- index中的显示 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">name</span>=<span class="string">"commentItem-index"</span> &gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">'comment-item'</span> <span class="attr">data-id</span>=<span class="string">'&#123;&#123;comment_id&#125;&#125;'</span> <span class="attr">data-fnum</span>=<span class="string">'&#123;&#123;comment_floor&#125;&#125;'</span> <span class="attr">data-content</span>=<span class="string">'&#123;&#123;content&#125;&#125; '</span><span class="attr">bindtap</span>=<span class="string">'gotoMsgDetails'</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">'comment-item-top'</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">text</span> <span class="attr">class</span>=<span class="string">'comment-nickname'</span>&gt;</span>&#123;&#123;temp_nickname&#125;&#125;<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">text</span> <span class="attr">class</span>=<span class="string">'comment_floor'</span>&gt;</span>&#123;&#123;comment_floor&#125;&#125;F<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">text</span> <span class="attr">class</span>=<span class="string">'comment-content'</span>&gt;</span>&#123;&#123;content&#125;&#125;<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">text</span> <span class="attr">class</span>=<span class="string">'comment-time'</span>&gt;</span>&#123;&#123;write_time&#125;&#125;<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">'comment-showmore'</span>&gt;</span>查看更多...(&#123;&#123;commentCount&#125;&#125;条)<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">view</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>通过 data-id绑定并传参<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gotoMsgDetails: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"触发跳转函数"</span>,e)</span><br><span class="line">        <span class="built_in">console</span>.log(e.currentTarget.dataset.id, e.currentTarget.dataset.fnum,e.currentTarget.dataset.content);</span><br><span class="line">        <span class="keyword">const</span> temp = e.currentTarget.dataset</span><br><span class="line">        wx.navigateTo(&#123;</span><br><span class="line">            url: <span class="string">'../msgDetails/msgDetails?info='</span> + temp.id+<span class="string">'&amp;floorNum='</span>+ temp.fnum+<span class="string">'&amp;content='</span>+temp.content,</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="App构造器"><a href="#App构造器" class="headerlink" title="App构造器"></a>App构造器</h2><table>
+<thead>
+<tr>
+<th>参数属性</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>onLaunch</td>
+<td>Function</td>
+<td>当小程序初始化完成时，会触发 onLaunch（全局只触发一次）</td>
+</tr>
+<tr>
+<td>onShow</td>
+<td>Function</td>
+<td>当小程序启动，或从后台进入前台显示，会触发 onShow</td>
+</tr>
+<tr>
+<td>onHide</td>
+<td>Function</td>
+<td>当小程序从前台进入后台，会触发 onHide</td>
+</tr>
+<tr>
+<td>onError</td>
+<td>Function</td>
+<td>当小程序发生脚本错误，或者 API 调用失败时，会触发 onError 并带上错误信息</td>
+</tr>
+<tr>
+<td>其他字段</td>
+<td>任意</td>
+<td>可以添加任意的<strong>函数</strong>或数据到 Object 参数中，在App实例回调用 this 可以访问</td>
+</tr>
+</tbody>
+</table>
+<p>App构造器可以传递其他参数作为全局属性以达到全局共享数据的目的，其他js也可以把app.js中的自定义函数当作公共函数来使用。</p>
+<h2 id="页面的生命周期和打开参数"><a href="#页面的生命周期和打开参数" class="headerlink" title="页面的生命周期和打开参数"></a>页面的生命周期和打开参数</h2><p>onLoad方法会携带打开参数option</p>
+<p>生命周期回调函数执行顺序  onLoad =&gt; onShow =&gt;onReady</p>
+<p>一般从别的页面返回到当前页面时，当前页的onShow方法都会被调用。</p>
+<p>setData用法</p>
+<p>setData其一般调用格式是 setData(data, callback)，第一个参数是由多个key: value构成的Object对象，第二个参数是一个回调函数（因为渲染层和逻辑层不在一个线程）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// page.js</span></span><br><span class="line">Page(&#123;</span><br><span class="line">  onLoad: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.setData(&#123;</span><br><span class="line">      text: <span class="string">'change data'</span></span><br><span class="line">    &#125;, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="comment">// 在这次setData对界面渲染完毕后触发</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>data中的key还可以非常灵活，以数据路径的形式给出，例如 this.setData({“d[0]”: 100}); this.setData({“d[1].text”: ‘Goodbye’}); 我们只要保持一个原则就可以提高小程序的渲染性能：每次只设置需要改变的最小单位数据。</p>
+</blockquote>
+<h2 id="页面的用户行为注意"><a href="#页面的用户行为注意" class="headerlink" title="页面的用户行为注意"></a>页面的用户行为注意</h2><ul>
+<li>下拉刷新 onPullDownRefresh</li>
+<li>上拉触底 onReachBottom</li>
+</ul>
+<p>前俩个需要在app.json的window选项中或<strong>页面配置page.json</strong>中设置enablePullDownRefresh为true。</p>
+<ul>
+<li>页面滚动 onPageScroll</li>
+<li>用户转发 onShareAppMessage</li>
+</ul>
+<p>自定义转发在此处设置</p>
+<h2 id="小程序结构"><a href="#小程序结构" class="headerlink" title="小程序结构"></a>小程序结构</h2><p><img src="C:\Users\roy\Desktop\wx_miniprogram\TIM截图20190407133311.png" alt></p>
+<h2 id="自定义组件"><a href="#自定义组件" class="headerlink" title="自定义组件"></a>自定义组件</h2><blockquote>
+<p>input-with-label的WXML</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">label</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">slot</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>页面WXML</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">input-with-label</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;/<span class="name">input-with-label</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>用上面的例子来说，当在 button 上触发一个事件时：</p>
+<p>l 如果事件是非冒泡的，那只能在 button 上监听到事件；</p>
+<p>l 如果事件是在 Shadow Tree 上冒泡的，那 button 、 input-with-label 、view 可以依次监听到事件；</p>
+<p>l 如果事件是在 Composed Tree 上冒泡的，那 button 、 slot 、label 、 input-with-label 、 view 可以依次监听到事件。</p>
+<p><strong>在自定义组件中使用triggerEvent触发事件时，可以指定事件的bubbles、composed和capturePhase属性，用于标注事件的冒泡性质。</strong></p>
+<blockquote>
+<p> triggerEvent事例</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Component(&#123;</span><br><span class="line">  methods: &#123;</span><br><span class="line">    helloEvent: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">this</span>.triggerEvent(<span class="string">'hello'</span>, &#123;&#125;, &#123;</span><br><span class="line"></span><br><span class="line">        bubbles: <span class="literal">true</span>,      <span class="comment">// 这是一个冒泡事件</span></span><br><span class="line"></span><br><span class="line">        composed: <span class="literal">true</span>,     <span class="comment">// 这个事件在Composed Tree 上冒泡</span></span><br><span class="line"></span><br><span class="line">        capturePhase: <span class="literal">false</span> <span class="comment">// 这个事件没有捕获阶段</span></span><br><span class="line"></span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>其中，tap等用户触摸引发的事件是在ComposedTree上的冒泡事件，其他事件大多是非冒泡事件。</p>
+</blockquote>
+<h2 id="所有组件共有属性"><a href="#所有组件共有属性" class="headerlink" title="所有组件共有属性"></a>所有组件共有属性</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">id：组件唯一标识</span><br><span class="line"><span class="class"><span class="keyword">class</span>：组件的样式类</span></span><br><span class="line">style：组件的内联样式类</span><br><span class="line">hidden:组件是否显示</span><br><span class="line"><span class="keyword">data</span>-*：自定义属性  组件上触发的事件时，会发送给事件处理函数</span><br></pre></td></tr></table></figure>
+<h2 id="原生组件"><a href="#原生组件" class="headerlink" title="原生组件"></a>原生组件</h2><p>原生组件在WebView这一层的渲染任务是很简单，只需要渲染一个占位元素，之后客户端在这块占位元素之上叠了一层原生界面。因此，原生组件的层级会比所有在WebView层渲染的普通组件要高。</p>
+<p>引入原生组件主要有3个好处：</p>
+<ol>
+<li>扩展Web的能力。比如像输入框组件（input, textarea）有更好地控制键盘的能力。</li>
+<li>体验更好，同时也减轻WebView的渲染工作。比如像地图组件（map）这类较复杂的组件，其渲染工作不占用WebView线程，而交给更高效的客户端原生处理。</li>
+<li>绕过setData、数据通信和重渲染流程，使渲染性能更好。比如像画布组件（canvas）可直接用一套丰富的绘图接口进行绘制。</li>
+</ol>
+<p><strong>原生组件脱离在WebView渲染流程外，这带来了一些限制</strong>。最主要的限制是一些CSS样式无法应用于原生组件，例如，不能在父级节点使用overflow:hidden来裁剪原生组件的显示区域；不能使用transformrotate让原生组件产生旋转等。</p>
+<p>开发者最为常见的问题是，<strong>原生组件会浮于页面其他组件之上</strong>（相当于拥有正无穷大的z-index值）使其它组件不能覆盖在原生组件上展示。想要解决这个问题，可以考虑<strong>使用cover-view和cover-image组件。这两个组件也是原生组件，同样是脱离WebView的渲染流程外，而原生组件之间的层级就可以按照一定的规则控制。</strong></p>
+<h2 id="代码包加载"><a href="#代码包加载" class="headerlink" title="代码包加载"></a>代码包加载</h2><blockquote>
+<p>微信会在小程序启动前为小程序准备好通用的运行环境。这个运行环境包括几个供小程序使用的线程，并在其中完成小程序基础库的初始化，预先执行通用逻辑，尽可能做好小程序的启动准备。这样可以显著减少小程序的启动时间。<br>小程序的代码包被下载（或从缓存中读取）完成后，小程序的代码会被加载到适当的线程中执行。<strong>此时，所有app.js、页面所在的JS文件和所有其他被require的JS文件会被自动执行一次</strong>，小程序基础库会完成所有页面的注册。在小程序代码调用Page构造器的时候，小程序基础库会记录页面的基础信息，如初始数据（data）、<strong>方法等。需要注意的是，如果一个页面被多次创建，并不会使得这个页面所在的JS文件被执行多次，而仅仅是根据初始数据多生成了一个页面实例（this），在页面JS文件中直接定义的变量，在所有这个页面的实例间是共享的。</strong><br>例如，若从页面A使用wx.navigateTo跳转到页面B，再使用wx.navigateTo跳转到页面A，<strong>此时页面栈中有三个页面：A、B、A。这时两个A页面的实例将共享它的JS文件中Page构造器以外直接定义的变量。</strong>有经验的开发者可以利用这个特性，但一些开发者也会错误地共享出一些变量，因而使用时要小心。</p>
+</blockquote>
+<p><em>小程序代码包加载期间执行的代码示例</em></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'加载 page.js'</span>)</span><br><span class="line"><span class="keyword">var</span> count = <span class="number">0</span></span><br><span class="line">Page(&#123;</span><br><span class="line">  onLoad: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    count += <span class="number">1</span>     <span class="comment">//可以记录此页面被创建多少次</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'第 '</span> + count + <span class="string">' 次启动这个页面'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="db-command-push-更新指令"><a href="#db-command-push-更新指令" class="headerlink" title="db.command.push 更新指令"></a>db.command.push 更新指令</h2><p>更新指令，对一个值为数组的字段，往数组尾部添加一个或多个值。或字段原为空，则创建该字段并设数组为传入值。</p>
+<h2 id="js-变量做key的值-将变量放在-中"><a href="#js-变量做key的值-将变量放在-中" class="headerlink" title="js 变量做key的值  将变量放在[ ]中"></a>js 变量做key的值  将变量放在[ ]中</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> groupNum=<span class="number">2</span></span><br><span class="line"><span class="keyword">let</span> num=<span class="number">10</span></span><br><span class="line"><span class="keyword">let</span> group =<span class="string">'temp_nickname'</span>+groupNum    </span><br><span class="line"><span class="keyword">let</span> tempName = res.data[group][num]  <span class="comment">// 等于res.data.temp_nickname2[10]</span></span><br></pre></td></tr></table></figure>
+<h2 id="this的用法："><a href="#this的用法：" class="headerlink" title="this的用法："></a>this的用法：</h2><p>非箭头函数调用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">getSomething:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> that=<span class="keyword">this</span>  <span class="comment">// 将js页面对象this在此处拷贝为that</span></span><br><span class="line">	wx.request(&#123;</span><br><span class="line">  		url: <span class="string">'test.php'</span>, <span class="comment">//仅为示例，并非真实的接口地址</span></span><br><span class="line">  		data: &#123;</span><br><span class="line">    		x: <span class="string">''</span>,</span><br><span class="line">  		&#125;,</span><br><span class="line">  		header: &#123;</span><br><span class="line">    		<span class="string">'content-type'</span>: <span class="string">'application/json'</span> <span class="comment">// 默认值</span></span><br><span class="line">  		&#125;,</span><br><span class="line">  		success: (res) &#123;</span><br><span class="line">    		<span class="built_in">console</span>.log(res.data)</span><br><span class="line">    		that.setData(&#123;  <span class="comment">//此处用this会报错：”‘this’ is undefined“</span></span><br><span class="line">       			list:res.data[<span class="number">0</span>]</span><br><span class="line">    		&#125;)</span><br><span class="line">  		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用es6箭头函数后：（es6的箭头函数会获得整个Page对象，不需要’let that=this’）</p>
+<p>箭头函数中的this是一层层向上寻找的实例，会找到Page这个实例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">getSomething:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	wx.request(&#123;</span><br><span class="line">  		url: <span class="string">'test.php'</span>, <span class="comment">//仅为示例，并非真实的接口地址</span></span><br><span class="line">  		data: &#123;</span><br><span class="line">    		x: <span class="string">''</span>,</span><br><span class="line">  		&#125;,</span><br><span class="line">  		header: &#123;</span><br><span class="line">    		<span class="string">'content-type'</span>: <span class="string">'application/json'</span> <span class="comment">// 默认值</span></span><br><span class="line">  		&#125;,</span><br><span class="line">  		success: <span class="function">(<span class="params">res</span>) =&gt;</span>&#123;</span><br><span class="line">    		<span class="built_in">console</span>.log(res.data)</span><br><span class="line">    		<span class="keyword">this</span>.setData(&#123; </span><br><span class="line">       			list:res.data[<span class="number">0</span>]</span><br><span class="line">    		&#125;)</span><br><span class="line">  		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="WXSS"><a href="#WXSS" class="headerlink" title="WXSS"></a>WXSS</h2>
+      </section>
+    </article>
+    
+    
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+      <h1>
+        catalog
+      </h1>
+      <div class="content">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#先实现雏形，进行单元测试，再在迭代的过程中重构"><span class="toc-number">1.</span> <span class="toc-text">先实现雏形，进行单元测试，再在迭代的过程中重构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重构技巧：小步前进，频繁测试。"><span class="toc-number">2.</span> <span class="toc-text">重构技巧：小步前进，频繁测试。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用console-log-该页面-xml-””-来打log，有助于查bug定位"><span class="toc-number">3.</span> <span class="toc-text">使用console.log([该页面].xml,**””**)来打log，有助于查bug定位</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#路由："><span class="toc-number">4.</span> <span class="toc-text">路由：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#强制类型转换-："><span class="toc-number">5.</span> <span class="toc-text">强制类型转换 ：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取用户openid："><span class="toc-number">6.</span> <span class="toc-text">获取用户openid：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#云开发数据库读取权限"><span class="toc-number">7.</span> <span class="toc-text">云开发数据库读取权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Await（云函数中数据库操作）"><span class="toc-number">8.</span> <span class="toc-text">Await（云函数中数据库操作）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本地使用time函数"><span class="toc-number">9.</span> <span class="toc-text">本地使用time函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小程序中Const的坑"><span class="toc-number">10.</span> <span class="toc-text">小程序中Const的坑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#提高列表渲染效率，使用wx-key"><span class="toc-number">11.</span> <span class="toc-text">提高列表渲染效率，使用wx:key</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-data-‘-‘-来绑定item，并传参"><span class="toc-number">12.</span> <span class="toc-text">使用 data- ‘ ‘=  来绑定item，并传参</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#App构造器"><span class="toc-number">13.</span> <span class="toc-text">App构造器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#页面的生命周期和打开参数"><span class="toc-number">14.</span> <span class="toc-text">页面的生命周期和打开参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#页面的用户行为注意"><span class="toc-number">15.</span> <span class="toc-text">页面的用户行为注意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小程序结构"><span class="toc-number">16.</span> <span class="toc-text">小程序结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义组件"><span class="toc-number">17.</span> <span class="toc-text">自定义组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#所有组件共有属性"><span class="toc-number">18.</span> <span class="toc-text">所有组件共有属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原生组件"><span class="toc-number">19.</span> <span class="toc-text">原生组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码包加载"><span class="toc-number">20.</span> <span class="toc-text">代码包加载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#db-command-push-更新指令"><span class="toc-number">21.</span> <span class="toc-text">db.command.push 更新指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#js-变量做key的值-将变量放在-中"><span class="toc-number">22.</span> <span class="toc-text">js 变量做key的值  将变量放在[ ]中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#this的用法："><span class="toc-number">23.</span> <span class="toc-text">this的用法：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WXSS"><span class="toc-number">24.</span> <span class="toc-text">WXSS</span></a></li></ol>
+      </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy;
+      2020 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/ScrollMagic.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  document.body.addEventListener('touchstart', function () { });
+
+  // 文章图片预览
+  $("article img").each(function () {
+    var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+    $(this).wrapAll(strA);
+  });
+
+  // 目录联动
+  let tocLinkList = $('.toc-link')
+
+  let controller = new ScrollMagic.Controller({
+    globalSceneOptions: {
+      triggerHook: 0.01
+    }
+  })
+
+  tocLinkList.each(function (index, elem) {
+    let href = $(this).attr("href");
+    let nextHref = tocLinkList.eq(index + 1).attr("href");
+    let height = href && nextHref ? $(nextHref).offset().top - $(href).offset().top : 0
+
+    new ScrollMagic.Scene({ triggerElement: href })
+      .duration(height)
+      .setClassToggle(".toc [href='" + href + "']", 'active')
+      .addTo(controller)
+  })
+
+  window.addEventListener('load', function () {
+    // 目录联动 图片加载完成后从新计算
+    tocLinkList.each(function (index, elem) {
+      let href = $(this).attr("href");
+      let nextHref = tocLinkList.eq(index + 1).attr("href");
+      let height = href && nextHref ? $(nextHref).offset().top - $(href).offset().top : 0
+
+      new ScrollMagic.Scene({ triggerElement: href })
+        .duration(height)
+        .setClassToggle(".toc [href='" + href + "']", 'active')
+        .addTo(controller)
+    })
+  })
+</script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>
