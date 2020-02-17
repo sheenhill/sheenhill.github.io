@@ -99,7 +99,7 @@
 </ul>
 <p>再加上其他奇奇怪怪的问题可能会导致授权状态的失效或者不及时，所以我们需要的在尽可能完善的节点去检查并更新授权状态。</p>
 <h2 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h2><p>下图是对检查授权状态以及其必要节点的概述：</p>
-<p><img src="http://q5mhlk4uy.bkt.clouddn.com/imgs/getAuthPlot常规进入小程序获取用户权限流程图(简洁版" alt="常规进入小程序获取用户权限流程图(简洁版)">.jpg)</p>
+<p><img src="http://q5mhlk4uy.bkt.clouddn.com/imgs/getAuthPlot常规进入小程序获取用户权限流程图(简洁版" alt="常规进入小程序获取用户权限流程图">.jpg)</p>
 <p>获取并更新授权状态是一个很重要的模块，所以我会在所有可能需要用到授权状态的页面的onShow()生命周期中调用getAuth()来通过异步网络请求来更新授权状态。</p>
 <p>不过</p>
 
