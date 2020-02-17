@@ -9,8 +9,8 @@
     <link rel="icon" href="/imgs/favicon.ico">
   
     
-  <title>三级缓存实现友好的鉴权功能 | 炜峄的博客</title>
-  <meta name="description" content>
+  <title>三级缓存实现鉴权功能 | 炜峄的博客</title>
+  <meta name="description" content="为了友好的用户体验，需要再多优化一点点-- | ">
   <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -57,21 +57,67 @@
     <article>
       <section class="content markdown-body">
         <h1>
-          三级缓存实现友好的鉴权功能
+          三级缓存实现鉴权功能
         </h1>
         <div class="post-meta">
           <i class="fa fa-calendar" aria-hidden="true"></i> <time>
             2020/02/16</time>
           
+          | <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/微信小程序/">微信小程序</a>
+  </div>
+
+
+
+          
+          
+          |
+          
+          <i class="fa fa-tags" aria-hidden="true"></i>
+          
+          
+  <a href="/tags/#思考" class="tag">思考</a>
+
+  <a href="/tags/#鉴权" class="tag">鉴权</a>
+
+  <a href="/tags/#重构" class="tag">重构</a>
+
+
           
         </div>
-        
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我在小程序的开发中自始至终都有个问题困扰着我，那就是如何准确获取用户的登录态，以下简称为鉴权。</p>
+<p>我认为鉴权在用户一旦授权后，其使用过程中应该是感知不到鉴权，也不应该因为鉴权让用户频繁操作。</p>
+<p>随着项目的一步步完善，穿插在项目中的鉴权也在一点点被优化，现在可以记录一波我优化鉴权的崎岖路了，希望能给你也给我自己一点启发。</p>
+<h2 id="情景分析"><a href="#情景分析" class="headerlink" title="情景分析"></a>情景分析</h2><p>小程序对未授权的用户会禁止一些官方API。</p>
+<p>小程序中授权状态失效状态的可能有   ：</p>
+<ul>
+<li>新用户第一次打开小程序，引导进入授权页，授权并生成留言墙标识 wallNum</li>
+<li>老用户重新使用小程序（在收藏中删除），引导进入授权页重新授权</li>
+<li>用户在小程序中关闭授权，引导进入授权页重新授权</li>
+</ul>
+<p>再加上其他奇奇怪怪的问题可能会导致授权状态的失效或者不及时，所以我们需要的在尽可能完善的节点去检查并更新授权状态。</p>
+<h2 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h2><p>下图是对检查授权状态以及其必要节点的概述：</p>
+<p><img src="http://q5mhlk4uy.bkt.clouddn.com/imgs/getAuthPlot常规进入小程序获取用户权限流程图(简洁版" alt="常规进入小程序获取用户权限流程图(简洁版)">.jpg)</p>
+<p>获取并更新授权状态是一个很重要的模块，所以我会在所有可能需要用到授权状态的页面的onShow()生命周期中调用getAuth()来通过异步网络请求来更新授权状态。</p>
+<p>不过</p>
+
       </section>
     </article>
     
     
   </div>
   <aside>
+    
+    <div class="toc-container">
+      <h1>
+        catalog
+      </h1>
+      <div class="content">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#情景分析"><span class="toc-number">2.</span> <span class="toc-text">情景分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决问题"><span class="toc-number">3.</span> <span class="toc-text">解决问题</span></a></li></ol>
+      </div>
+    </div>
     
   </aside>
 </main>
