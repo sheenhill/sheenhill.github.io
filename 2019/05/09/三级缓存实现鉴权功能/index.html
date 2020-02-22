@@ -87,21 +87,51 @@
 
           
         </div>
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我在小程序的开发中自始至终都有个问题困扰着我，那就是如何准确获取用户的登录态，以下简称为鉴权。</p>
-<p>我认为鉴权在用户一旦授权后，其使用过程中应该是感知不到鉴权，也不应该因为鉴权让用户频繁操作。</p>
-<p>随着项目的一步步完善，穿插在项目中的鉴权也在一点点被优化，现在可以记录一波我优化鉴权的崎岖路了，希望能给你也给我自己一点启发。</p>
-<h2 id="情景分析"><a href="#情景分析" class="headerlink" title="情景分析"></a>情景分析</h2><p>小程序对未授权的用户会禁止一些官方API。</p>
-<p>小程序中授权状态失效状态的可能有   ：</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>如何准确及时地获取用户当前的登录状态，是我在项目一开始的时候就在考虑并一直优化的一个模块。</p>
+<p>如今，项目已经告一段落了，我想把过往的思考和笔记整理一下，希望对你有一点启发。</p>
+<h2 id="情景分析"><a href="#情景分析" class="headerlink" title="情景分析"></a>情景分析</h2><p>在小程序中，在获取授权态的用户在使用中可能会导致一些API无法使用（其中包括一些官方API）。</p>
+<p>然而又很多情况导致小程序中无授权状态，常见情况如下：</p>
 <ul>
-<li>新用户第一次打开小程序，引导进入授权页，授权并生成留言墙标识 wallNum</li>
+<li>新用户第一次打开小程序，引导进入授权页，授权并生成唯一账号</li>
 <li>老用户重新使用小程序（在收藏中删除），引导进入授权页重新授权</li>
 <li>用户在小程序中关闭授权，引导进入授权页重新授权</li>
 </ul>
-<p>再加上其他奇奇怪怪的问题可能会导致授权状态的失效或者不及时，所以我们需要的在尽可能完善的节点去检查并更新授权状态。</p>
-<h2 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h2><p>下图是对检查授权状态以及其必要节点的概述：</p>
+<p>再加上一些边缘问题可能会导致授权状态的失效或者不及时，所以我们需要在一些节点中去检查并更新授权状态。</p>
+<p>我是拿微信云开发来做小程序后端的，授权成功也就是只返回当前用户的留言墙号（关联一系列的表）所以整体逻辑很简单，不过</p>
+<h2 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h2><p>我们需要一种方案来实现小程序使用过程中授权被用户关闭，或者其他原因导致授权关闭情况下的检测，不过前提是合理地利用资源。</p>
+<p>下图是我对流程的简单整理：</p>
 <p><img src="http://q5mhlk4uy.bkt.clouddn.com/imgs/getAuthPlot/1.jpg" alt="常规进入小程序获取用户权限流程图"></p>
 <p>获取并更新授权状态是一个很重要的模块，所以我会在所有可能需要用到授权状态的页面的onShow()生命周期中调用getAuth()来通过异步网络请求来更新授权状态。</p>
-<p>不过</p>
+<p>不过 </p>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>本地函数 \</td>
+<td>云函数</td>
+<td>能获取最正确的授权状态和标识值</td>
+<td>速度慢</td>
+</tr>
+<tr>
+<td>本地缓存</td>
+<td>可以持久化状态和标识，让小程序正确初始化</td>
+<td>需要注意存取的逻辑与时机，复杂</td>
+</tr>
+<tr>
+<td>全局变量</td>
+<td>速度快，存取方便，快捷</td>
+<td>数据不可靠</td>
+</tr>
+</tbody>
+</table>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这种思路还同样适用于及时性的控制信息,又可以避免多次调用接口。</p>
+<p>后来，我也在很多开源工具或组件中看到了这种用多层结构来保证较高的资源利用率，如recyclerView中的复用机制，还有glide中网络图片资源的缓存等等，一整套逻辑严密的多层缓存封装在内部，还有适当暴露出来的可以自定义缓存机制的接口，啧啧啧，我柠檬了。</p>
 
       </section>
     </article>
@@ -115,7 +145,7 @@
         catalog
       </h1>
       <div class="content">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#情景分析"><span class="toc-number">2.</span> <span class="toc-text">情景分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决问题"><span class="toc-number">3.</span> <span class="toc-text">解决问题</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#情景分析"><span class="toc-number">2.</span> <span class="toc-text">情景分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决问题"><span class="toc-number">3.</span> <span class="toc-text">解决问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
       </div>
     </div>
     
