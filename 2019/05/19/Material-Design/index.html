@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang=>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="keywords" content>
+  
+    <link rel="icon" href="/imgs/favicon.ico">
+  
+    
+  <title>Material Design | 炜峄的博客</title>
+  <meta name="description" content="AS自带的MD简介，第一次尝试翻译。（非纯翻译，带点自己对MD的理解） | ">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class="logo" href="/">
+      <span>炜峄的博客</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id="post">
+  <div class="content">
+    <article>
+      <section class="content markdown-body">
+        <h1>
+          Material Design
+        </h1>
+        <div class="post-meta">
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>
+            2019/05/19</time>
+          
+          | <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+
+
+          
+          
+          |
+          
+          <i class="fa fa-tags" aria-hidden="true"></i>
+          
+          
+  <a href="/tags/#翻译" class="tag">翻译</a>
+
+  <a href="/tags/#MD设计" class="tag">MD设计</a>
+
+
+          
+        </div>
+        <blockquote>
+<p>Material Design(材料设计语言)</p>
+<p>–百度百科</p>
+</blockquote>
+<p><strong>实体感 </strong></p>
+<p>材料设计语言对应的是一种表现在合理化空间（屏幕显示）和运动系统（交互）的统一理论。我们的材料设计语言灵感来源于对纸与墨的研究，然而我们在屏幕中所运用的材料设计语言因为科技的发展，可以在现在和未来更充分地表现设计者的想象力。</p>
+<p>组件的表面质感与边缘细节的呈现方式都符合现实世界真实的表现。</p>
+<p>屏幕世界中的实体感要尽量接近于现实世界，因此这些组件有了熟悉的使用方法与真实的触感，这可以让用户很快地熟悉组件的功能。然而灵活的原质化设计将真实物理世界嫁接到屏幕之中，遵循物理规则的组件更能给用户贴近真实的体验。</p>
+<p>运动轨迹、表面质感和光影效果这三个方面是传达组件运动、存在状态以及和其他组件之间相互作用关系的关键。恰当的光影效果能传达简洁明了的信息，如留白可以表现组件之间的分隔，阴影可表示该组件是可活动的。</p>
+<p><strong>沉浸式体验</strong></p>
+<p>在基于打印的设计排版中，网格、空间、线条、颜色和图像这些都是引导视觉的基础元素。这些元素的作用并不仅仅是为了取悦眼睛，这些元素还可以用来创造层次、意义以及焦点。使用深思熟虑的色彩搭配、边缘相近的图像、通过大量线条实现的合理排版以及刻意的留白所创造出的醒目的图像界面，能让用户有很好的沉浸式体验。强调为用户提供的操作点，可以快速引导用户熟悉App的核心功能。</p>
+<p><strong>动画效果</strong></p>
+<p>动画效果遵循并强化了用户的行为，用户通过行为会使整个UI发生改变，所以所有的行为都应发生在一个独立的环境中，而不去干扰app以外的事物。在用户触发动画效果之后，整个页面会发生部分改变，甚至被重组，动画过渡应该是流畅、合理的。适当且有意义的动画效果是可以保持用户注意力的连贯性。</p>
+<p>触发组件的动画效果所产生的反馈，应该是轻微而清晰的。转场动画应该是高效而合理的。</p>
+<p><strong>3D世界</strong></p>
+<p>整个原质化的环境是一个3D的空间，它有x轴，y轴以及z轴。Z轴与显示器平面垂直对齐，正Z轴向观察者延伸。每个组件都在沿着z轴方向有1dp的厚度。</p>
+<p>在网页上，z轴被用来分层而不是为了视角。3D 空间通过操纵 y 轴进行仿真。</p>
+<p><strong>光与影</strong></p>
+<p>在原质化环境中，虚拟的灯光照亮整个场景。关键的灯光创建阴影，而环境光从所有角度将阴影柔化。在Android开发中，当光源被沿Z轴的不同位置的组件阻挡时，就会出现阴影。在Web上，阴影仅通过操纵Y轴来描绘。静止高度（z轴方向）不管什么尺寸的组件组件都有不能改变的静止或者默认高度。当用户使一个对象的高度产生变化时，它将会尽快恢复到自身的静止高度。</p>
+<p><strong>组件高度</strong></p>
+<p>某一组件类型的静止高度在移动应用中是一个常量。（比如，FAB 的高度不会在某一个应用中是 6 dp ，而在另一个应用中是 16 dp）组件在某一平台中可能会存在多种静止高度，这取决于环境的深度。（比如，TV 相比于移动端和桌面来说就具有更深的层次）</p>
+<p><strong>可变高度与动态高度偏移位置</strong>（z轴）</p>
+<p>有一些组件类型是有可变高度的，意思是这些组件受到用户的某些行为（如触碰）或者系统事件时会暂时改变它的高度，这个高度既是动态高度偏移位置。动态高度偏移位置是某一组件移动的目标高度，这与该组件的静止状态有关。可以确定的是高度的改变在事件和组件类型中的属性是绑定的。比如说，所有通过触碰来降低的组件相对于其静态高度的高度变化。一旦触碰事件结束，组件就会恢复到它的静止高度上。</p>
+<p><strong>避免高度的冲突</strong></p>
+<p>具有可变高度的组件在其静止高度和动态高度偏移位置之间移动时可能会遇到其他组件。因为前文说到每个组件无论大小，都是由1dp厚度的，也就是说组件在从静止高度移动到动态高度偏移位置时，遇到其他组件是无法穿过其他组件的，所以说无论是复杂组件中还是整个页面中是不会产生xy轴平面上大小由重叠的组件，在z轴上有冲突的情况。但是有可能会达不到想要的视界效果。在组件的层级上，组件可以在发生干扰之前移动或者被移动（x轴或y轴上）。例如，一个浮动按钮（FAB）可以在用户选择一张卡片之前消失或移出屏幕，或者它也可以在某一个snack bar出现时移动。在布局时，你需要通过设计你的布局来将产生冲突的机会降到最低。比如，可以通过将 FAB 置于某个卡片流的一端来避免当用户尝试获取某个卡片时所产生的冲突。</p>
+<p>思考，现在大多数主流app，都会把信息流组件的视觉效果看起来z轴为0，这看起来是比有默认高度的card组件显示信息的页面简洁了不少。</p>
+<p>原文：</p>
+<p><strong>“Material is the metaphor.”</strong><br>“A material metaphor is the unifying theory of a rationalized space and a system of motion.”<br>“The material is grounded in tactile reality, inspired by the study of paper and ink, yet technologically advanced and open to imagination and magic.”<br>“Surfaces and edges of the material provide visual cues that are grounded in reality. “<br>“The use of familiar tactile attributes helps users quickly understand affordances. “<br>“Yet the flexibility of the material creates new affordances that supercede those in the physical world, without breaking the rules of physics.”<br>“The fundamentals of light, surface, and movement are key to conveying how objects move, interact, and exist in space and in relation to each other.”<br>“Realistic lighting shows seams, divides space, and indicates moving parts.”<br><strong>“Bold, graphic, intentional.”</strong><br>“The foundational elements of print based design typography, grids, space, scale, color,and use of imagery guide visual treatments. “<br>“These elements do far more than please the eye. “<br>“They create hierarchy, meaning, and focus. ‘’<br>“Deliberate color choices, edge to edge imagery, large scale typography, and intentional white space create a bold and graphic interface that immerse the user in the experience.”<br>“An emphasis on user actions makes core functionality immediately apparent and provides waypoints for the user.”<br><strong>“Motion provides meaning.”</strong><br>“Motion respects and reinforces the user as the prime mover.”<br>“Primary user actions are inflection points that initiate motion, transforming the whole design.”<br>“All action takes place in a single environment.”<br>“Objects are presented to the user without breaking the continuity of experience even as they transform and reorganize.”<br>“Motion is meaningful and appropriate, serving to focus attention and maintain continuity. “<br>“Feedback is subtle yet clear. Transitions are efﬁcient yet coherent.”<br><strong>“3D world.”</strong><br>“The material environment is a 3D space, which means all objects have x, y, and z dimensions. “<br>“The z-axis is perpendicularly aligned to the plane of the display, with the positive z-axis extending towards the viewer.”<br>“Every sheet of material occupies a single position along the z-axis and has a standard 1dp thickness.”<br>“On the web, the z-axis is used for layering and not for perspective.The 3D world is emulated by manipulating the y-axis.”<br><strong>“Light and shadow.”</strong><br>“Within the material environment, virtual lights illuminate the scene.”<br>“Key lights create directional shadows, while ambient light creates soft shadows from all angles.”<br>“Shadows in the material environment are cast by these two light sources. “<br>“In Android development, shadows occur when light sources are blocked by sheets of material at various positions along the z-axis. “<br>“On the web, shadows are depicted by manipulating the y-axis only. “<br><strong>“Resting elevation.”</strong><br>“All material objects, regardless of size, have a resting elevation, or default elevation that does not change. “<br>“If an object changes elevation, it should return to its resting elevation as soon as possible.\n\n”<br><strong>“Component elevations.”</strong><br>“The resting elevation for a component type is consistent across apps (e.g., FAB elevation does not vary from 6dp in one app to 16dp in another app).”<br>“Components may have different resting elevations across platforms, depending on the depth of the environment (e.g., TV has a greater depth than mobile or desktop).”<br><strong>“Responsive elevation and dynamic elevation offsets.”</strong><br>“Some component types have responsive elevation, meaning they change elevation in response to user input (e.g., normal, focused, and pressed) or system events. These elevation changes are consistently implemented using dynamic elevation offsets.”<br>“Dynamic elevation offsets are the goal elevation that a component moves towards, relative to the component’s resting state. They ensure that elevation changes are consistent across actions and component types. For example, all components that lift on press have the same elevation change relative to their resting elevation.Once the input event is completed or cancelled, the component will return to its resting elevation.”<br><strong>“Avoiding elevation interference.”</strong><br>“Components with responsive elevations may encounter other components as they move between their resting elevations and dynamic elevation offsets. “<br>“Because material cannot pass through other material, components avoid interfering with one another any number of ways, whether on a per component basis or using the entire app layout.”<br>“On a component level, components can move or be removed before they cause interference. “<br>“For example, a floating action button (FAB) can disappear or move off screen before a user picks up a card, or it can move if a snackbar appears.”<br>“On the layout level, design your app layout to minimize opportunities for interference. “<br>“For example, position the FAB to one side of stream of a cards so the FAB won’t interfere when a user tries to pick up one of cards.”</p>
+
+      </section>
+    </article>
+    
+    
+  </div>
+  <aside>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy;
+      2020 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/ScrollMagic.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  document.body.addEventListener('touchstart', function () { });
+
+  // 文章图片预览
+  $("article img").each(function () {
+    var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+    $(this).wrapAll(strA);
+  });
+
+  // 目录联动
+  let tocLinkList = $('.toc-link')
+
+  let controller = new ScrollMagic.Controller({
+    globalSceneOptions: {
+      triggerHook: 0.01
+    }
+  })
+
+  tocLinkList.each(function (index, elem) {
+    let href = $(this).attr("href");
+    let nextHref = tocLinkList.eq(index + 1).attr("href");
+    let height = href && nextHref ? $(nextHref).offset().top - $(href).offset().top : 0
+
+    new ScrollMagic.Scene({ triggerElement: href })
+      .duration(height)
+      .setClassToggle(".toc [href='" + href + "']", 'active')
+      .addTo(controller)
+  })
+
+  window.addEventListener('load', function () {
+    // 目录联动 图片加载完成后从新计算
+    tocLinkList.each(function (index, elem) {
+      let href = $(this).attr("href");
+      let nextHref = tocLinkList.eq(index + 1).attr("href");
+      let height = href && nextHref ? $(nextHref).offset().top - $(href).offset().top : 0
+
+      new ScrollMagic.Scene({ triggerElement: href })
+        .duration(height)
+        .setClassToggle(".toc [href='" + href + "']", 'active')
+        .addTo(controller)
+    })
+  })
+</script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>
