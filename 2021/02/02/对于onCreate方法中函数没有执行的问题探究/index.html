@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang=>
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="/imgs/favicon.ico">
+  
+    
+  <title>对于onCreate方法中函数没有执行的问题探究 | 炜峄的博客</title>
+  <meta name="description" content="persistentState是保证了系统关机重启后数据恢复的能力 | ">
+  
+<link rel="stylesheet" href="/style.css">
+
+  
+<link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>炜峄的博客</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+      <section class="content markdown-body">
+        <h1>
+          对于onCreate方法中函数没有执行的问题探究
+        </h1>
+        <div class='post-meta'>
+          <i class="fa fa-calendar"
+            aria-hidden="true"></i> <time>
+            2021/02/02</time>
+          
+          | <i class="fa fa-folder-open-o"
+            aria-hidden="true"></i>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+
+
+          
+          
+          |
+          
+          <i class="fa fa-tags"
+            aria-hidden="true"></i>
+          
+          
+  <a href="/tags/#Android" class='tag'>Android</a>
+
+  <a href="/tags/#%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95" class='tag'>填坑记录</a>
+
+
+          
+        </div>
+        <p>这俩天在研究jetpack的lifecycle时，发现照着官网示例做的demo没有触发自定义LifecycleObserver里面的方法（打印生命周期log），在排查了半天之后，才终于发现问题所在，先上解决方法。</p>
+<p>修改之前：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">V2_MainActivity</span> : <span class="type">AppCompatActivity</span></span>(R.layout.activity_main_v2) &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?, persistentState: <span class="type">PersistableBundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState, persistentState)</span><br><span class="line">        lifecycle.addObserver(MyObserver(javaClass.simpleName))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>修改之后：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">V2_MainActivity</span> : <span class="type">AppCompatActivity</span></span>(R.layout.activity_main_v2) &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        lifecycle.addObserver(MyObserver(javaClass.simpleName))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>好了，问题解决，溜了溜了。（接下来我们稍微去探究一下下，不探究源码，只为了弄清里面的思路）</p>
+<p>我们直接追到Activity.java中去看一下onCreate()</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(<span class="meta">@Nullable</span> Bundle savedInstanceState,</span></span></span><br><span class="line"><span class="function"><span class="params">            <span class="meta">@Nullable</span> PersistableBundle persistentState)</span> </span>&#123;</span><br><span class="line">        onCreate(savedInstanceState);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(<span class="meta">@Nullable</span> Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>啊这，<strong>onCreate (savedInstanceState, persistentState)</strong>里面不就直接调用的是<strong>onCreate(savedInstanceState)</strong>，也没什么花花绕啊，不就算一个方法吗。</p>
+<p>其实我在刚遇到这问题时也是看到这个地方就换解决方向了，都没在意为什么<strong>persistentState</strong>这个参数没用到。</p>
+<p>根据官方对onCreate (savedInstanceState, persistentState)的解释：</p>
+<blockquote>
+<p>Same as <code>onCreate(android.os.Bundle)</code> but called for those activities created with the attribute <code>R.attr.persistableMode</code> set to <code>persistAcrossReboots</code>.</p>
+<p>onCreate (savedInstanceState, persistentState)和onCreate (savedInstanceState）是一样的，不过调用了onCreate (savedInstanceState, persistentState)的activity需要设置<em>persistableMode属性为“**</em>persistAcrossReboots*<em>”。</em></p>
+</blockquote>
+<p>也就是需要在<strong>AndroidManifest.xml</strong>给activity加个属性：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity</span><br><span class="line">            android:name=&quot;.MainActivity&quot;</span><br><span class="line">            android:persistableMode=&quot;persistAcrossReboots&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<p>那问题来了，这个<strong>persistentState</strong>究竟有什么用？</p>
+<p><em>在看了好几份资料之后，感觉这东西应该用不上，但是可以当个知识点记录一下。</em></p>
+<p>首先这个是api21之后提供的。</p>
+<p>我们先来说一下<strong>onCreate (savedInstanceState, persistentState)</strong>的<strong>savedInstanceState</strong>参数，这个用的较多。当我们需要旋转屏幕的时候，我们会在这里保存一下数据，防止在旋转之后页面数据丢失用户体验不好。而<strong>persistentState是保证了**</strong>系统关机重启后数据恢复的能力，**这种极端情况确实值得记一下，万一以后要用到了呢。再深究就是为什么数据存在这俩种bundle里面不会丢了，不过到此处应该点到为止，下次一定了。</p>
+<p>具体怎么保存数据，方法如下代码。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSaveInstanceState</span><span class="params">(Bundle outState, PersistableBundle outPersistentState)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onRestoreInstanceState</span><span class="params">(Bundle savedInstanceState, PersistableBundle persistentState)</span></span></span><br></pre></td></tr></table></figure>
+<p>总结一下：</p>
+<p>由于我目前在实验jetpack，viewModel已经解决了这个问题，所以我也没深究了。</p>
+<p>回到我一开始的问题在onCreate()里面调用lifecycle.addObserver()无效，是因为压根没走到这，什么代码都是无效的。我之所以一开始没注意到是onCreate()的原因，是因为用了Jetpack的Navigation，所有的展示页面都用的是fragment，导航也有Navigation处理，所以唯一一个activity就当个入口用，之前想着把这个activity当作application用的，探究了这个问题才想起来activity在旋转后是会重建的，又解决了未来可能会碰到的一个坑。</p>
+<p>所以正常情况下，<strong>onCreate (savedInstanceState, persistentState)</strong>根本用不到的，还是老老实实用<strong>onCreate(savedInstanceState)</strong>启动activity。</p>
+
+      </section>
+    </article>
+    
+    
+  </div>
+  <aside>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy;
+      2021 | Powered by <a href="https://hexo.io"
+        target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath"
+        target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="/lib/ScrollMagic.min.js"></script>
+
+
+<script src="/lib/lodash.min.js"></script>
+
+<script>
+  document.body.addEventListener('touchstart', function () { });
+
+  // 文章图片预览
+  $("article img").each(function () {
+    var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+    $(this).wrapAll(strA);
+  });
+
+  // 目录联动
+  let tocLinkList = $('.toc-link')
+
+  let controller = new ScrollMagic.Controller({
+    globalSceneOptions: {
+      triggerHook: 0.01
+    }
+  })
+
+  tocLinkList.each(function (index, elem) {
+    let href = $(this).attr("href");
+    let nextHref = tocLinkList.eq(index + 1).attr("href");
+    let height = href && nextHref ? $(nextHref).offset().top - $(href).offset().top : 0
+
+    new ScrollMagic.Scene({ triggerElement: href })
+      .duration(height)
+      .setClassToggle(".toc [href='" + href + "']", 'active')
+      .addTo(controller)
+  })
+
+  window.addEventListener('load', function () {
+    // 目录联动 图片加载完成后从新计算
+    tocLinkList.each(function (index, elem) {
+      let href = $(this).attr("href");
+      let nextHref = tocLinkList.eq(index + 1).attr("href");
+      let height = href && nextHref ? $(nextHref).offset().top - $(href).offset().top : 0
+
+      new ScrollMagic.Scene({ triggerElement: href })
+        .duration(height)
+        .setClassToggle(".toc [href='" + href + "']", 'active')
+        .addTo(controller)
+    })
+  })
+</script>
+
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+
+</body>
+</html>
