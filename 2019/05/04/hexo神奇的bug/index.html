@@ -96,6 +96,12 @@
 <p>结果第二天一看，发现整个网站没了样式。百度并没有找到好的解决方法。从网页的报错上看，是因为网页在根目录下找不到style.css，我看了一下github仓库下的master分支（用来存放静态网页的），还真没有style.css，倒是有个style.scss。一开始我以为我之前的操作有问题，确定不是操作的问题之后，我在主题的作者给的demo中找到了css文件，拷到本地的public文件夹下，hexo d，就成了。</p>
 <p>虽然这一套操作很不优雅，但是对着博客重装了好几遍本地环境，网速又慢，实在是没脾气了都。我寻思着原因也许是这个主题跟最新的hexo不兼容吧，在生成静态网页的public文件夹中每次都是生成scss文件，而html中都是引用的css文件，这就让人很头大了。好在每次hexo g不会覆盖public下的css文件，也就是说改一次就好了。</p>
 <p>最重要的是这个<strong>aath主题</strong>挺喜欢的，不想换了。</p>
+<hr>
+<p>2021-02-09</p>
+<p>（回来填坑）</p>
+<p>果然操作还是有问题，作者的github上readme已经提示要按照npm依赖了，，，，</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install <span class="comment">--save hexo-renderer-sass</span></span><br></pre></td></tr></table></figure>
+<p>看名字应该是hexo中scss文件转css的。</p>
 
       </section>
     </article>
